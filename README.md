@@ -12,3 +12,4 @@
 
 ### Easy Problems
 - https://leetcode.com/problems/fizz-buzz/description/
+- https://leetcode.com/problems/binary-search/
