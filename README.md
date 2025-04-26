@@ -13,3 +13,7 @@
 ### Easy Problems
 - https://leetcode.com/problems/fizz-buzz/description/
 - https://leetcode.com/problems/binary-search/
+
+### Meduim Problems
+- https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+- https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/

@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 import 'package:test/test.dart';
 
 void main() {
@@ -44,9 +45,9 @@ class Solution {
     return -1;
   }
 
-  /// Solution 2 ----- Right Solution ----- 
+  /// Solution 2 ----- Right Solution -----
   /// TC: O(Log n) --  SC: O(1)
-  /// 
+  ///
   // int search(List<int> nums, int target) {
   //   int firstIndex = 0;
   //   int lastIndex = nums.length - 1;
