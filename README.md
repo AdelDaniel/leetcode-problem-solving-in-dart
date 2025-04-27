@@ -13,6 +13,7 @@
 ### Easy Problems
 - https://leetcode.com/problems/fizz-buzz/description/
 - https://leetcode.com/problems/binary-search/
+- XOR: https://leetcode.com/problems/single-number/description/
 
 ### Meduim Problems
 - https://leetcode.com/problems/search-in-rotated-sorted-array/description/
