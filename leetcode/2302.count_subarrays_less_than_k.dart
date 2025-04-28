@@ -96,8 +96,8 @@ class Solution {
 //   //     /// Remove the last J you added because you will add again in the next time
 //   //     j--;
 //   //     list.removeLast();
-//   //     int lenght = list.length;
-//   //     subArraysNumber += (lenght * (lenght + 1)) ~/ 2;
+//   //     int length = list.length;
+//   //     subArraysNumber += (length * (length + 1)) ~/ 2;
 //   //     list.removeAt(0);
 //   //     // scoreSum = list.fold(0, (previous, current) => previous + current);
 //   //     print("subArraysNumber: $subArraysNumber");
