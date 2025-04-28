@@ -20,3 +20,10 @@
 ### Meduim Problems
 - https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 - https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+
+
+### Topics 
+- XOR 
+- Binary Search 
+- Rotated Sorted Array
+- 
