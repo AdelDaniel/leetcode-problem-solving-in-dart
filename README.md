@@ -17,7 +17,8 @@
 - https://leetcode.com/problems/count-subarrays-of-length-three-with-a-condition/description/?envType=daily-question&envId=2025-04-27
 - https://leetcode.com/problems/palindrome-number/description/
 - Log(n^2) https://leetcode.com/problems/two-sum/description/ 
-- HashMap  https://leetcode.com/problems/two-sum/description/
+- HashMap: https://leetcode.com/problems/two-sum/description/
+- Two Pointers: https://leetcode.com/problems/move-zeroes/description/
 
 
 
@@ -34,3 +35,4 @@
 - Palindrome Number 
 - Factorial 
 - Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
+- 2 Pointers (Two Pointers) -> left and right pointers
