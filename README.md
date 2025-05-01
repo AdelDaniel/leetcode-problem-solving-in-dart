@@ -21,6 +21,7 @@
 ### Medium Problems
 - https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 - https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+- Factorial Trailing Zeroes: https://leetcode.com/problems/factorial-trailing-zeroes/submissions/ 
 
 
 ### Topics 
@@ -28,3 +29,4 @@
 - Binary Search 
 - Rotated Sorted Array
 - Palindrome Number 
+- Factorial 
