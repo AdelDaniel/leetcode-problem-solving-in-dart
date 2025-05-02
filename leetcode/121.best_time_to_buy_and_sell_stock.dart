@@ -10,13 +10,15 @@ class Solution {
   int maxProfit(List<int> prices) {
     int minBuyIndex = 0;
     int maxProfit = 0;
+    int profit = 0;
 
     for (int i = 0; i < prices.length; i++) {
       if (prices[minBuyIndex] > prices[i]) {
         minBuyIndex = i;
       }
-      if (maxProfit < prices[i] - prices[minBuyIndex]) {
-        maxProfit = prices[i] - prices[minBuyIndex];
+      profit = prices[i] - prices[minBuyIndex];
+      if (maxProfit < profit) {
+        maxProfit = profit;
       }
     }
     return maxProfit;
