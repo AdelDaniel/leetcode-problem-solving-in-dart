@@ -19,6 +19,7 @@
 - Log(n^2) https://leetcode.com/problems/two-sum/description/ 
 - HashMap: https://leetcode.com/problems/two-sum/description/
 - Two Pointers: https://leetcode.com/problems/move-zeroes/description/
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 
 
