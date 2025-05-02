@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
 import 'package:test/test.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
 }
 
 class Solution {
-  //! Best Solution TC: O(N) SC: O(1)
+  //! Enhance the Best Solution TC: O(N) SC: O(1)
   int maxProfit(List<int> prices) {
     int minBuyIndex = 0;
     int maxProfit = 0;
@@ -15,14 +16,33 @@ class Solution {
     for (int i = 0; i < prices.length; i++) {
       if (prices[minBuyIndex] > prices[i]) {
         minBuyIndex = i;
-      }
-      profit = prices[i] - prices[minBuyIndex];
-      if (maxProfit < profit) {
-        maxProfit = profit;
+      } else {
+        profit = prices[i] - prices[minBuyIndex];
+        if (maxProfit < profit) {
+          maxProfit = profit;
+        }
       }
     }
     return maxProfit;
   }
+
+  // //! Best Solution TC: O(N) SC: O(1)
+  // int maxProfit(List<int> prices) {
+  //   int minBuyIndex = 0;
+  //   int maxProfit = 0;
+  //   int profit = 0;
+
+  //   for (int i = 0; i < prices.length; i++) {
+  //     if (prices[minBuyIndex] > prices[i]) {
+  //       minBuyIndex = i;
+  //     }
+  //     profit = prices[i] - prices[minBuyIndex];
+  //     if (maxProfit < profit) {
+  //       maxProfit = profit;
+  //     }
+  //   }
+  //   return maxProfit;
+  // }
 
   // //! Time Limit Exceeded ---- TC: O(N^2)
   // int maxProfit(List<int> prices) {
