@@ -11,6 +11,7 @@
 ## Leetcode
 
 ### Easy Problems
+- https://leetcode.com/problems/length-of-last-word/
 - https://leetcode.com/problems/fizz-buzz/description/
 - https://leetcode.com/problems/binary-search/
 - XOR: https://leetcode.com/problems/single-number/description/
