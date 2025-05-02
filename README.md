@@ -20,6 +20,7 @@
 - HashMap: https://leetcode.com/problems/two-sum/description/
 - Two Pointers: https://leetcode.com/problems/move-zeroes/description/
 - One Pointer: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+- https://leetcode.com/problems/ransom-note/ 
 
 
 
