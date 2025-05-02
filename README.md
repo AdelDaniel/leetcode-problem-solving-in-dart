@@ -32,6 +32,7 @@
 - https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
 - Factorial Trailing Zeroes: https://leetcode.com/problems/factorial-trailing-zeroes/submissions/ 
 - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+- https://leetcode.com/problems/rotate-array/description/
 
 
 ### Topics 
