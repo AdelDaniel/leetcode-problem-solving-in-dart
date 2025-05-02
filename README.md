@@ -22,6 +22,7 @@
 - One Pointer: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 - https://leetcode.com/problems/ransom-note/ 
 - https://leetcode.com/problems/contains-duplicate/ 
+- https://leetcode.com/problems/contains-duplicate-ii/description/
 
 
 
@@ -37,5 +38,5 @@
 - Rotated Sorted Array
 - Palindrome Number 
 - Factorial 
-- Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
+- Hash Map Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
 - 2 Pointers (Two Pointers) -> left and right pointers
