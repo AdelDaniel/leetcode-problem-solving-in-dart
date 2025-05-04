@@ -33,6 +33,8 @@
 - Factorial Trailing Zeroes: https://leetcode.com/problems/factorial-trailing-zeroes/submissions/ 
 - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 - https://leetcode.com/problems/rotate-array/description/
+- https://leetcode.com/problems/jump-game/description/
+
 
 
 ### Topics 
@@ -43,3 +45,8 @@
 - Factorial 
 - Hash Map Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
 - 2 Pointers (Two Pointers) -> left and right pointers
+
+
+### Algorithms
+- Greedy Algorithm
+- 
