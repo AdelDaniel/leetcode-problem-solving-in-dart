@@ -46,7 +46,8 @@
 - Factorial 
 - Hash Map Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
 - 2 Pointers (Two Pointers) -> left and right pointers
-- Prefix sum
+- Prefix sum &&& Suffix sum 
+- Prefic product &&& Suffix product
 
 
 ### Algorithms

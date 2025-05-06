@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/product-of-array-except-self/
+
 import 'package:test/test.dart';
 
 void main() {
@@ -11,7 +12,8 @@ void main() {
 }
 
 class Solution {
-  ////! Enhance  Prefix Sum And Better Solution
+  ////! Enhance  Prefix Product And Better Solution
+  ////! TC: O(2n) = O(n) --- SC: O(n)
   List<int> productExceptSelf(List<int> nums) {
     List<int> result = List.filled(nums.length, 1);
     int total = 1;
@@ -30,7 +32,27 @@ class Solution {
     return result;
   }
 
-  ////! Under Standing using prefix sum
+  ////! Prefix Product From Udemy Video
+  // List<int> productExceptSelf(List<int> nums) {
+  //   List<int> prefixProduct = List.filled(nums.length, 1);
+  //   prefixProduct[0] = 1;
+  //   int zerosCount = 0;
+  //   for (int i = 1; i < nums.length; i++) {
+  //     prefixProduct[i] = prefixProduct[i - 1] * nums[i - 1];
+  //     if (nums[i] == 0) zerosCount++;
+  //     if (zerosCount >= 2) return List.filled(nums.length, 0);
+  //   }
+  //   int suffixProductTotal = 1;
+
+  //   for (int i = nums.length - 1; i >= 0; i--) {
+  //     prefixProduct[i] = prefixProduct[i] * suffixProductTotal;
+  //     suffixProductTotal *= nums[i];
+  //   }
+
+  //   return prefixProduct;
+  // }
+
+  ////! Under Standing using prefix Product
   // List<int> productExceptSelf(List<int> nums) {
   //   List<int> right = List.filled(nums.length, 1);
   //   List<int> left = List.filled(nums.length, 1);
@@ -53,7 +75,8 @@ class Solution {
   //   return result;
   // }
 
-  ////!  Accepted From the first time.  TC: O(2n) = O(n)
+  ////! Accepted From the first time.  TC: O(2n) = O(n) --- SC: O(n)
+  ////! Bad Solution With
   // List<int> productExceptSelf(List<int> nums) {
   //   List<int> result = List.filled(nums.length, 0);
   //   int total = 1;
