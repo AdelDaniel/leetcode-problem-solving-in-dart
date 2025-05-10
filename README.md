@@ -36,8 +36,8 @@
 - https://leetcode.com/problems/rotate-array/description/
 - https://leetcode.com/problems/jump-game/description/
 - https://leetcode.com/problems/product-of-array-except-self/
-- https://leetcode.com/problems/sequential-digits/description/
-
+- Hash Table: https://leetcode.com/problems/sequential-digits/description/
+- Hash Table: https://leetcode.com/problems/find-all-duplicates-in-an-array/ 
 
 
 ### Topics 
@@ -46,12 +46,23 @@
 - Rotated Sorted Array
 - Palindrome Number 
 - Factorial 
-- Hash Map Map (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
+- Hash Map 
 - 2 Pointers (Two Pointers) -> left and right pointers
 - Prefix sum &&& Suffix sum 
 - Prefic product &&& Suffix product
+- Hash Table
 
 
 ### Algorithms
 - Greedy Algorithm
-- 
+
+
+### Notes:
+- Map In Dart (Hash Map ---- Linked Hash Map ---- Splay Tree Map) 
+- Hash Map (Not Ordered) -- Hash Table (Ordered)
+- Hash Table 
+A Hash table is defined as a data structure used to insert, look up, and remove key-value pairs quickly.
+It operates on the hashing concept,
+where each key is translated by a hash function into a distinct index in an array.
+  The index functions as a storage location for the matching value.
+In simple words, it maps the keys with the value.
