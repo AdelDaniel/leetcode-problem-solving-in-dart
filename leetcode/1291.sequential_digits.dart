@@ -99,7 +99,7 @@ class Solution {
   //       int newSequentialNumber = 0;
 
   //       /// Get the next sequentialNumber form the before --> will be reversed 321
-  //       /// current sequentail 123 -> 432
+  //       /// current sequential 123 -> 432
   //       while (sequentialNumber != 0) {
   //         mod = sequentialNumber % 10;
   //         sequentialNumber ~/= 10;

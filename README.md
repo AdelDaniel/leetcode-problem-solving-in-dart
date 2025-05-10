@@ -41,6 +41,9 @@
 - https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/?envType=daily-question&envId=2025-05-10
 - 
 
+### Hard Problems
+- https://leetcode.com/problems/first-missing-positive/description/
+- 
 
 ### Topics 
 - XOR 
@@ -48,11 +51,16 @@
 - Rotated Sorted Array
 - Palindrome Number 
 - Factorial 
-- Hash Map 
+- **Hash Map**
 - 2 Pointers (Two Pointers) -> left and right pointers
 - Prefix sum &&& Suffix sum 
-- Prefic product &&& Suffix product
+- Prefix product &&& Suffix product
 - Hash Table
+- Mark Indices
+  - By negative value
+  - By the index equals its value
+  - By zeros if not the list contains zeros
+- 
 
 
 ### Algorithms
