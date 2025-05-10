@@ -38,6 +38,8 @@
 - https://leetcode.com/problems/product-of-array-except-self/
 - Hash Table: https://leetcode.com/problems/sequential-digits/description/
 - Hash Table: https://leetcode.com/problems/find-all-duplicates-in-an-array/ 
+- https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/?envType=daily-question&envId=2025-05-10
+- 
 
 
 ### Topics 
