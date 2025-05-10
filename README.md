@@ -24,6 +24,7 @@
 - https://leetcode.com/problems/ransom-note/ 
 - https://leetcode.com/problems/contains-duplicate/ 
 - https://leetcode.com/problems/contains-duplicate-ii/description/
+- https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
 
 
 
