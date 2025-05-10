@@ -35,6 +35,7 @@
 - https://leetcode.com/problems/rotate-array/description/
 - https://leetcode.com/problems/jump-game/description/
 - https://leetcode.com/problems/product-of-array-except-self/
+- https://leetcode.com/problems/sequential-digits/description/
 
 
 
