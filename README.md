@@ -56,10 +56,7 @@
 - Prefix sum &&& Suffix sum 
 - Prefix product &&& Suffix product
 - Hash Table
-- Mark Indices
-  - By negative value
-  - By the index equals its value
-  - By zeros if not the list contains zeros
+- Mark Indices --> By negative value
 - 
 
 

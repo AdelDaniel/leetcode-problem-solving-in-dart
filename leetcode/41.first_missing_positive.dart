@@ -28,6 +28,35 @@ class Solution {
     }
     return -1;
   }
+
+  /// Udemy Solution
+  // int firstMissingPositive(List<int> nums) {
+  //   int n = nums.length;
+
+  //   // preprocess the array
+  //   for (int i = 0; i < n; i++) {
+  //     if (nums[i] <= 0) {
+  //       nums[i] = n + 1;
+  //     }
+  //   }
+
+  //   // marking indices
+  //   for (int i = 0; i < n; i++) {
+  //     int index = nums[i].abs() - 1;
+  //     if (index < n && nums[index] > 0) {
+  //       nums[index] *= -1;
+  //     }
+  //   }
+
+  //   // scan the array
+  //   for (int i = 0; i < n; i++) {
+  //     if (nums[i] > 0) {
+  //       return i + 1;
+  //     }
+  //   }
+
+  //   return n + 1;
+  // }
 }
 
 void runTests() {
@@ -37,6 +66,10 @@ void runTests() {
     // Basic examples from problem statement
     test('Example 1: [1,2,0] → 3', () {
       expect(s.firstMissingPositive([1, 2, 0]), equals(3));
+    });
+
+    test('Example: [1, 2, 6, 3, 5, 4] → 3', () {
+      expect(s.firstMissingPositive([1, 2, 6, 3, 5, 4]), equals(7));
     });
 
     test('Example 2: [3,4,-1,1] → 2', () {
