@@ -41,6 +41,7 @@
 - Hash Table: https://leetcode.com/problems/find-all-duplicates-in-an-array/ 
 - https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/?envType=daily-question&envId=2025-05-10
 - Bad Question : I don't recommend to solve: https://leetcode.com/problems/next-permutation/description/
+- https://leetcode.com/problems/subarray-product-less-than-k/description/
 - 
 
 ### Hard Problems
@@ -59,7 +60,7 @@
 - Prefix product &&& Suffix product
 - Hash Table
 - Mark Indices --> By negative value
-- 
+- Sliding Window
 
 
 ### Algorithms
