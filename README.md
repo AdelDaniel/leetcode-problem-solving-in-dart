@@ -43,6 +43,8 @@
 - Bad Question : I don't recommend to solve: https://leetcode.com/problems/next-permutation/description/
 - https://leetcode.com/problems/subarray-product-less-than-k/description/
 - https://leetcode.com/problems/k-diff-pairs-in-an-array/description/ 
+- Two Pointers: with new idea: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+- 
 - 
 
 ### Hard Problems
