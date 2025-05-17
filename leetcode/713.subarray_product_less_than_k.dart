@@ -12,6 +12,7 @@ void main() {
 
 class Solution {
   ////! Done: Solved the problem
+  /// TC: O(n) SC: O(1)
   int numSubarrayProductLessThanK(List<int> nums, int k) {
     /// Check if empty Array
     if (nums.isEmpty) {
@@ -56,14 +57,6 @@ class Solution {
     }
 
     return subArraysCount;
-  }
-
-  int factorialIterative(int n) {
-    int result = 1;
-    for (int i = 1; i <= n; i++) {
-      result *= i;
-    }
-    return result;
   }
 }
 
