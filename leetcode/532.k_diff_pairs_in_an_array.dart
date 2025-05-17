@@ -10,63 +10,89 @@ void main(List<String> args) {
 }
 
 class Solution {
-  ////! My Solution and solved the problem
-  ////! Hash Map
+  ////! Enhance My Hash Map solution
+  ////! AI help
+  ////! Best Time Solution
   int findPairs(List<int> nums, int k) {
-    if (nums.length <= 1) return 0;
+    if (nums.isEmpty || k < 0) return 0;
 
-    final Map<int, Set<int>> map = {};
     int pairsCount = 0;
+    final Map<int, int> map = {};
 
     for (int num in nums) {
-      /// Both Negative Number and positive number are calculated and counted
-      if (map[num]?.length == 2) {
-        continue;
-      }
+      map[num] = (map[num] ?? 0) + 1;
+    }
 
-      /// Postive number == negative number
+    final mapKeys = map.keys;
+    for (int num in mapKeys) {
       if (k == 0) {
-        if (map[num] == null) {
-          map[num] = {};
-        } else if (map[num]?.isEmpty == true) {
-          map[num]?.add(num);
-          pairsCount++;
-        }
-        continue;
-      }
-
-      if (map[num] == null) {
-        map[num] = {};
-      }
-
-      /// Find positive other number i - k = positive number
-      int positiveNumber = num - k;
-
-      /// if we can add the current num to the positive number set
-      /// then the positive number appeared before and its set isn't contains the current num
-      if (map[positiveNumber] != null &&
-          map[positiveNumber]?.contains(num) == false &&
-          map[num]?.contains(positiveNumber) == false) {
-        map[positiveNumber]?.add(num);
-        map[num]?.add(positiveNumber);
-        pairsCount++;
-      }
-
-      /// Find negative other number
-      int negativeNumber = num + k;
-
-      /// if we can add the current num to the negative number set
-      /// then the negative number appeared before and its set isn't contains the current num
-      if (map[negativeNumber] != null &&
-          map[negativeNumber]?.contains(num) == false &&
-          map[num]?.contains(negativeNumber) == false) {
-        map[negativeNumber]?.add(num);
-        map[num]?.add(negativeNumber);
-        pairsCount++;
+        if (map[num]! > 1) pairsCount++;
+      } else {
+        int otherNumber = num + k;
+        if (map.containsKey(otherNumber)) pairsCount++;
       }
     }
     return pairsCount;
   }
+
+  ////!
+  ////! My Solution and solved the problem
+  ////! Hash Map
+  // int findPairs(List<int> nums, int k) {
+  //   if (nums.length <= 1) return 0;
+
+  //   final Map<int, Set<int>> map = {};
+  //   int pairsCount = 0;
+
+  //   for (int num in nums) {
+  //     /// Both Negative Number and positive number are calculated and counted
+  //     if (map[num]?.length == 2) {
+  //       continue;
+  //     }
+
+  //     /// Postive number == negative number
+  //     if (k == 0) {
+  //       if (map[num] == null) {
+  //         map[num] = {};
+  //       } else if (map[num]?.isEmpty == true) {
+  //         map[num]?.add(num);
+  //         pairsCount++;
+  //       }
+  //       continue;
+  //     }
+
+  //     if (map[num] == null) {
+  //       map[num] = {};
+  //     }
+
+  //     /// Find positive other number i - k = positive number
+  //     int positiveNumber = num - k;
+
+  //     /// if we can add the current num to the positive number set
+  //     /// then the positive number appeared before and its set isn't contains the current num
+  //     if (map[positiveNumber] != null &&
+  //         map[positiveNumber]?.contains(num) == false &&
+  //         map[num]?.contains(positiveNumber) == false) {
+  //       map[positiveNumber]?.add(num);
+  //       map[num]?.add(positiveNumber);
+  //       pairsCount++;
+  //     }
+
+  //     /// Find negative other number
+  //     int negativeNumber = num + k;
+
+  //     /// if we can add the current num to the negative number set
+  //     /// then the negative number appeared before and its set isn't contains the current num
+  //     if (map[negativeNumber] != null &&
+  //         map[negativeNumber]?.contains(num) == false &&
+  //         map[num]?.contains(negativeNumber) == false) {
+  //       map[negativeNumber]?.add(num);
+  //       map[num]?.add(negativeNumber);
+  //       pairsCount++;
+  //     }
+  //   }
+  //   return pairsCount;
+  // }
 }
 
 void runTests() {
