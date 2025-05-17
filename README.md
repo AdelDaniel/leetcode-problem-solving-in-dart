@@ -42,6 +42,7 @@
 - https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/?envType=daily-question&envId=2025-05-10
 - Bad Question : I don't recommend to solve: https://leetcode.com/problems/next-permutation/description/
 - https://leetcode.com/problems/subarray-product-less-than-k/description/
+- https://leetcode.com/problems/k-diff-pairs-in-an-array/description/ 
 - 
 
 ### Hard Problems
