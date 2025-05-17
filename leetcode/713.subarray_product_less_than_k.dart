@@ -11,49 +11,68 @@ void main() {
 }
 
 class Solution {
-  ////! Done: Solved the problem
+  ////! Done: Solved the problem (MY SOLUTION)
   /// TC: O(n) SC: O(1)
+  // int numSubarrayProductLessThanK(List<int> nums, int k) {
+  //   /// Check if empty Array
+  //   if (nums.isEmpty) {
+  //     return 0;
+  //   }
+
+  //   /// Check if the list only one item
+  //   if (nums.length == 1) {
+  //     if (nums.first < k) {
+  //       return 1;
+  //     } else {
+  //       return 0;
+  //     }
+  //   }
+
+  //   int subArraysCount = 0;
+  //   int startPointerIndex = 0;
+  //   int endPointerIndex = 0;
+  //   int score = nums[endPointerIndex];
+
+  //   while (endPointerIndex < nums.length) {
+  //     if (score < k) {
+  //       subArraysCount += endPointerIndex - startPointerIndex + 1;
+  //       endPointerIndex++;
+  //       if (endPointerIndex < nums.length) {
+  //         score *= nums[endPointerIndex];
+  //       }
+  //     } else {
+  //       if (startPointerIndex < nums.length) {
+  //         score ~/= nums[startPointerIndex];
+  //       } else {
+  //         break;
+  //       }
+  //       startPointerIndex++;
+  //       if (endPointerIndex < startPointerIndex) {
+  //         endPointerIndex++;
+  //         if (endPointerIndex < nums.length) {
+  //           score *= nums[endPointerIndex];
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   return subArraysCount;
+  // }
+
+  /// Another Solution
+  /// AI Solution and from the course
   int numSubarrayProductLessThanK(List<int> nums, int k) {
-    /// Check if empty Array
-    if (nums.isEmpty) {
-      return 0;
-    }
-
-    /// Check if the list only one item
-    if (nums.length == 1) {
-      if (nums.first < k) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-
     int subArraysCount = 0;
-    int startPointerIndex = 0;
-    int endPointerIndex = 0;
-    int score = nums[endPointerIndex];
+    int left = 0;
+    int product = 1;
 
-    while (endPointerIndex < nums.length) {
-      if (score < k) {
-        subArraysCount += endPointerIndex - startPointerIndex + 1;
-        endPointerIndex++;
-        if (endPointerIndex < nums.length) {
-          score *= nums[endPointerIndex];
-        }
-      } else {
-        if (startPointerIndex < nums.length) {
-          score ~/= nums[startPointerIndex];
-        } else {
-          break;
-        }
-        startPointerIndex++;
-        if (endPointerIndex < startPointerIndex) {
-          endPointerIndex++;
-          if (endPointerIndex < nums.length) {
-            score *= nums[endPointerIndex];
-          }
-        }
+    for (int right = 0; right < nums.length; right++) {
+      product *= nums[right];
+      while (right >= left && product >= k) {
+        product ~/= nums[left];
+        left++;
       }
+      subArraysCount += right - left + 1;
     }
 
     return subArraysCount;
