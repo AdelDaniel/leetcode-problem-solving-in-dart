@@ -11,29 +11,49 @@ void main() {
 }
 
 class Solution {
-  ////! Binary Search
-  ////! The more hard solution with Binary Search TC: O(n*log(n))
+  ////! AI Solution Two Pointers (The Fastest) TC: O(n)
+  ////! The more hard solution with Binary Search TC: O(n)
   ////! Accepted And Faster
   List<int> twoSum(List<int> numbers, int target) {
-    for (int i = 0; i < numbers.length - 1; i++) {
-      final int otherNumber = target - numbers[i];
-      int leftIndex = i + 1;
-      int rightIndex = numbers.length - 1;
-
-      while (leftIndex <= rightIndex) {
-        int mid = leftIndex + (rightIndex - leftIndex) ~/ 2;
-        if (numbers[mid] == otherNumber) {
-          return [i + 1, mid + 1];
-        } else if (numbers[mid] > otherNumber) {
-          rightIndex = mid - 1;
-        } else {
-          leftIndex = mid + 1;
-        }
+    int leftIndex = 0;
+    int rightIndex = numbers.length - 1;
+    while (leftIndex <= rightIndex) {
+      int sum = numbers[leftIndex] + numbers[rightIndex];
+      if (sum == target) {
+        return [leftIndex + 1, rightIndex + 1];
+      } else if (sum > target) {
+        rightIndex--;
+      } else {
+        leftIndex++;
       }
     }
 
     return [];
   }
+
+  ////! Binary Search : TC: O(n*log(n))
+  ////! The more hard solution with Binary Search TC: O(n*log(n))
+  ////! Accepted And Faster
+  // List<int> twoSum(List<int> numbers, int target) {
+  //   for (int i = 0; i < numbers.length - 1; i++) {
+  //     final int otherNumber = target - numbers[i];
+  //     int leftIndex = i + 1;
+  //     int rightIndex = numbers.length - 1;
+
+  //     while (leftIndex <= rightIndex) {
+  //       int mid = leftIndex + (rightIndex - leftIndex) ~/ 2;
+  //       if (numbers[mid] == otherNumber) {
+  //         return [i + 1, mid + 1];
+  //       } else if (numbers[mid] > otherNumber) {
+  //         rightIndex = mid - 1;
+  //       } else {
+  //         leftIndex = mid + 1;
+  //       }
+  //     }
+  //   }
+
+  //   return [];
+  // }
 
   ////! Burte Force
   ////! The easy solution --> TC: O(n^2)
