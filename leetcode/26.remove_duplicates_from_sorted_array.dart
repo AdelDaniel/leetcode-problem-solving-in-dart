@@ -23,7 +23,7 @@ class Solution {
       }
     }
 
-    /// added 1 becacuse of lenght
+    /// added 1 becacuse of length
     return left + 1;
   }
 }
