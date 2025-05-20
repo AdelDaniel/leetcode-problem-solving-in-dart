@@ -11,29 +11,54 @@ void main() {
 }
 
 class Solution {
-  ////! Accepted From the first time TC: O(N) SC: O(1)
+  ////! Better Accepted From the first time TC: O(N) ----- SC: O(1)
+  ////! 2 Pointers Sort
   void sortColors(List<int> nums) {
-    int zerosCount = 0;
-    int onesCount = 0;
-    for (var i = 0; i < nums.length; i++) {
-      if (nums[i] == 0) {
-        zerosCount++;
-      } else if (nums[i] == 1) {
-        onesCount++;
-      }
-    }
-    for (var i = 0; i < nums.length; i++) {
-      if (zerosCount > 0) {
-        nums[i] = 0;
-        zerosCount--;
-      } else if (onesCount > 0) {
-        nums[i] = 1;
-        onesCount--;
+    int rightIndex = nums.length - 1;
+    int leftIndex = 0;
+    int midIndex = 0;
+    int temp = 0;
+    while (midIndex <= rightIndex) {
+      if (nums[midIndex] == 0) {
+        temp = nums[leftIndex];
+        nums[leftIndex] = 0;
+        nums[midIndex] = temp;
+        leftIndex++;
+        if (midIndex <= leftIndex) midIndex++;
+      } else if (nums[midIndex] == 2) {
+        temp = nums[rightIndex];
+        nums[rightIndex] = 2;
+        nums[midIndex] = temp;
+        rightIndex--;
       } else {
-        nums[i] = 2;
+        midIndex++;
       }
     }
   }
+
+  ////! Accepted From the first time TC: O(2N) -- TC: O(N) SC: O(1)
+  // void sortColors(List<int> nums) {
+  //   int zerosCount = 0;
+  //   int onesCount = 0;
+  //   for (var i = 0; i < nums.length; i++) {
+  //     if (nums[i] == 0) {
+  //       zerosCount++;
+  //     } else if (nums[i] == 1) {
+  //       onesCount++;
+  //     }
+  //   }
+  //   for (var i = 0; i < nums.length; i++) {
+  //     if (zerosCount > 0) {
+  //       nums[i] = 0;
+  //       zerosCount--;
+  //     } else if (onesCount > 0) {
+  //       nums[i] = 1;
+  //       onesCount--;
+  //     } else {
+  //       nums[i] = 2;
+  //     }
+  //   }
+  // }
 }
 
 void runTests() {
