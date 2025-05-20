@@ -46,7 +46,7 @@
 - https://leetcode.com/problems/subarray-product-less-than-k/description/
 - https://leetcode.com/problems/k-diff-pairs-in-an-array/description/ 
 - Two Pointers: with new idea: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
-- 
+- https://leetcode.com/problems/sort-colors/description/ 
 - 
 
 ### Hard Problems
@@ -81,3 +81,4 @@ It operates on the hashing concept,
 where each key is translated by a hash function into a distinct index in an array.
   The index functions as a storage location for the matching value.
 In simple words, it maps the keys with the value.
+
