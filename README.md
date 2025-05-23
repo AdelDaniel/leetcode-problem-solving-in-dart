@@ -31,6 +31,7 @@
 - https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
 - https://leetcode.com/problems/valid-palindrome/
 - https://leetcode.com/problems/merge-sorted-array/
+- https://leetcode.com/problems/valid-parentheses/description/
 
 ### Medium Problems
 
@@ -63,15 +64,16 @@
 - Rotated Sorted Array
 - Palindrome Number
 - Factorial
-- **Hash Map**
+- **Hash Map** (DS)
 - 2 Pointers (Two Pointers)
   - left and right pointers
   - Sliding window
 - Prefix sum &&& Suffix sum
 - Prefix product &&& Suffix product
-- Hash Table
+- Hash Table (DS)
 - Mark Indices --> By negative value
 - Sliding Window
+- Stack (DS)
 
 ### Algorithms
 
