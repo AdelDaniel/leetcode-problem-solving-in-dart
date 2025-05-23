@@ -10,33 +10,26 @@ void main(List<String> args) {
 }
 
 class Solution {
-  ////! Solved From the first time
+  /// Another Way to solve
   bool isValid(String s) {
-    List<int> brackets = [];
-    int openCurlyBracket = '{'.codeUnits[0];
-    int openSquareBracket = '['.codeUnits[0];
-    int openRoundBracket = '('.codeUnits[0];
+    List<String> brackets = [];
 
-    int closeCurlyBracket = '}'.codeUnits[0];
-    int closeSquareBracket = ']'.codeUnits[0];
-    int closeRoundBracket = ')'.codeUnits[0];
+    const Map<String, String> map = {
+      '{': '}',
+      '[': ']',
+      '(': ')',
+    };
 
-    for (final currentBracket in s.codeUnits) {
-      if (currentBracket == openRoundBracket ||
-          currentBracket == openSquareBracket ||
-          currentBracket == openCurlyBracket) {
+    for (int i = 0; i < s.length; i++) {
+      String currentBracket = s[i];
+      if (map.keys.contains(currentBracket)) {
         brackets.add(currentBracket);
 
         /// Make sure that the brackets is not empty
         /// before get the last one
       } else if (brackets.isNotEmpty) {
-        int lastAddedBracket = brackets.last;
-        bool isCloseRight = (lastAddedBracket == openCurlyBracket &&
-                currentBracket == closeCurlyBracket) ||
-            (lastAddedBracket == openSquareBracket &&
-                currentBracket == closeSquareBracket) ||
-            (lastAddedBracket == openRoundBracket &&
-                currentBracket == closeRoundBracket);
+        String lastAddedBracket = brackets.last;
+        bool isCloseRight = map[lastAddedBracket] == currentBracket;
 
         if (isCloseRight) {
           brackets.removeLast();
@@ -50,6 +43,47 @@ class Solution {
 
     return brackets.isEmpty;
   }
+
+  ////! Solved From the first time
+  // bool isValid(String s) {
+  //   List<int> brackets = [];
+  //   int openCurlyBracket = '{'.codeUnits[0];
+  //   int openSquareBracket = '['.codeUnits[0];
+  //   int openRoundBracket = '('.codeUnits[0];
+
+  //   int closeCurlyBracket = '}'.codeUnits[0];
+  //   int closeSquareBracket = ']'.codeUnits[0];
+  //   int closeRoundBracket = ')'.codeUnits[0];
+
+  //   for (final currentBracket in s.codeUnits) {
+  //     if (currentBracket == openRoundBracket ||
+  //         currentBracket == openSquareBracket ||
+  //         currentBracket == openCurlyBracket) {
+  //       brackets.add(currentBracket);
+
+  //       /// Make sure that the brackets is not empty
+  //       /// before get the last one
+  //     } else if (brackets.isNotEmpty) {
+  //       int lastAddedBracket = brackets.last;
+  //       bool isCloseRight = (lastAddedBracket == openCurlyBracket &&
+  //               currentBracket == closeCurlyBracket) ||
+  //           (lastAddedBracket == openSquareBracket &&
+  //               currentBracket == closeSquareBracket) ||
+  //           (lastAddedBracket == openRoundBracket &&
+  //               currentBracket == closeRoundBracket);
+
+  //       if (isCloseRight) {
+  //         brackets.removeLast();
+  //       } else {
+  //         return false;
+  //       }
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+
+  //   return brackets.isEmpty;
+  // }
 }
 
 void runTests() {
