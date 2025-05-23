@@ -87,3 +87,7 @@
   where each key is translated by a hash function into a distinct index in an array.
   The index functions as a storage location for the matching value.
   In simple words, it maps the keys with the value.
+
+- Find Sum of 2 Numbers in sorted List
+  1. Brute Force (Bad)
+  2. 2 Pointers
