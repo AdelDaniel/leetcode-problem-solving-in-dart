@@ -13,26 +13,45 @@ void main(List<String> args) {
 }
 
 class Solution {
-  ////! Success Submitted TC: O(n^2) + Sort TC
+  ////! Success Submitted TC: O(n^2) + Sort TC (O(NLog(N)))
+  ////! Enhance
   List<List<int>> threeSum(List<int> nums) {
     nums.sort();
 
-    final Map<String, List<int>> result = {};
+    final List<List<int>> result = [];
     for (int i = 0; i < nums.length - 2; i++) {
+      /// this line to break because we will not reach to target at the sorted array
       if (nums[i] > 0) break;
-      int target = -1 * nums[i];
+
+      /// To get rid of the duplicate So we will take the first number appeared in the list
+      /// So if the number appears for the second time we will continue
+      if (i != 0 && nums[i - 1] == nums[i]) continue;
+
+      int target = 0 - nums[i];
       int left = i + 1;
       int right = nums.length - 1;
 
       while (left < right) {
         int sum = nums[right] + nums[left];
         if (sum == target) {
-          result.putIfAbsent(
-            "${nums[i]}${nums[left]}${nums[right]}",
-            () => [nums[i], nums[left], nums[right]],
-          );
-          right--;
+          result.add([nums[i], nums[left], nums[right]]);
+
+          /// move to the next
           left++;
+          right--;
+
+          /// Skip all the left duplicates
+          /// If the new left is the same as the old then
+          while (left < right && nums[left] == nums[left - 1]) {
+            left++;
+          }
+
+          /// Skip all the right duplicate
+          while (left < right &&
+              right < nums.length - 1 &&
+              nums[right] == nums[right + 1]) {
+            right--;
+          }
         } else if (sum > target) {
           right--;
         } else {
@@ -40,8 +59,38 @@ class Solution {
         }
       }
     }
-    return result.values.toList();
+    return result;
   }
+
+  ////! Success Submitted TC: O(n^2) + Sort TC (O(NLog(N)))
+  // List<List<int>> threeSum(List<int> nums) {
+  //   nums.sort();
+
+  //   final Map<String, List<int>> result = {};
+  //   for (int i = 0; i < nums.length - 2; i++) {
+  //     if (nums[i] > 0) break;
+  //     int target = -1 * nums[i];
+  //     int left = i + 1;
+  //     int right = nums.length - 1;
+
+  //     while (left < right) {
+  //       int sum = nums[right] + nums[left];
+  //       if (sum == target) {
+  //         result.putIfAbsent(
+  //           "${nums[i]}${nums[left]}${nums[right]}",
+  //           () => [nums[i], nums[left], nums[right]],
+  //         );
+  //         right--;
+  //         left++;
+  //       } else if (sum > target) {
+  //         right--;
+  //       } else {
+  //         left++;
+  //       }
+  //     }
+  //   }
+  //   return result.values.toList();
+  // }
 
   ////! Time Limit Solution --> TC: O(n^3) + Sort TC
   //// ! Brute Force .
