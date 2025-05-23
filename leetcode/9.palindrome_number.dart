@@ -2,7 +2,11 @@
 import 'package:test/test.dart';
 
 void main() {
+  final stopwatch = Stopwatch()..start();
   runTests();
+
+  stopwatch.stop();
+  print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro s');
 }
 
 class Solution {
