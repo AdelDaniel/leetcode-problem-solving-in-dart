@@ -6,39 +6,71 @@ void main(List<String> args) {
   final stopwatch = Stopwatch()..start();
   runTests();
 
+  print(Solution().threeSum([-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6]));
+
   stopwatch.stop();
   print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro s');
 }
 
 class Solution {
-  ////! Time Limit Solution --> TC: O(n^3)
-  //// ! Brute Force .
+  ////! Success Submitted TC: O(n^2) + Sort TC
   List<List<int>> threeSum(List<int> nums) {
     nums.sort();
 
     final Map<String, List<int>> result = {};
     for (int i = 0; i < nums.length - 2; i++) {
       if (nums[i] > 0) break;
+      int target = -1 * nums[i];
+      int left = i + 1;
+      int right = nums.length - 1;
 
-      for (int j = i + 1; j < nums.length - 1; j++) {
-        if (nums[i] + nums[j] > 0) break;
-
-        for (int k = j + 1; k < nums.length; k++) {
-          int sum = nums[i] + nums[j] + nums[k];
-
-          if (sum == 0) {
-            result.putIfAbsent(
-              "${nums[i]}${nums[j]}${nums[k]}",
-              () => [nums[i], nums[j], nums[k]],
-            );
-          } else if (sum > 0) {
-            break;
-          }
+      while (left < right) {
+        int sum = nums[right] + nums[left];
+        if (sum == target) {
+          result.putIfAbsent(
+            "${nums[i]}${nums[left]}${nums[right]}",
+            () => [nums[i], nums[left], nums[right]],
+          );
+          right--;
+          left++;
+        } else if (sum > target) {
+          right--;
+        } else {
+          left++;
         }
       }
     }
     return result.values.toList();
   }
+
+  ////! Time Limit Solution --> TC: O(n^3) + Sort TC
+  //// ! Brute Force .
+  // List<List<int>> threeSum(List<int> nums) {
+  //   nums.sort();
+
+  //   final Map<String, List<int>> result = {};
+  //   for (int i = 0; i < nums.length - 2; i++) {
+  //     if (nums[i] > 0) break;
+
+  //     for (int j = i + 1; j < nums.length - 1; j++) {
+  //       if (nums[i] + nums[j] > 0) break;
+
+  //       for (int k = j + 1; k < nums.length; k++) {
+  //         int sum = nums[i] + nums[j] + nums[k];
+
+  //         if (sum == 0) {
+  //           result.putIfAbsent(
+  //             "${nums[i]}${nums[j]}${nums[k]}",
+  //             () => [nums[i], nums[j], nums[k]],
+  //           );
+  //         } else if (sum > 0) {
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return result.values.toList();
+  // }
 
   /// Wrong Solution
   /// Will make a duplicate
@@ -166,8 +198,8 @@ void runTests() {
     test('All same number except one: [1,1,1,1,1,-2] → [[1,1,-2]]', () {
       expect(
           s.threeSum([1, 1, 1, 1, 1, -2]),
-          equals([
-            [1, 1, -2]
+          unorderedMatches([
+            [1, 1, -2]..sort()
           ]));
     });
 
@@ -194,10 +226,7 @@ void runTests() {
       ];
       final result = s.threeSum(nums);
 
-      // Verify all expected triplets are present
-      for (final triplet in expected) {
-        expect(result, contains(triplet));
-      }
+      expect(result, unorderedMatches(expected));
 
       // Verify no extra triplets are present
       expect(result.length, equals(expected.length));

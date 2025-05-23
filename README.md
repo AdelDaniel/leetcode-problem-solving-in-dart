@@ -82,6 +82,7 @@
 - Map In Dart (Hash Map ---- Linked Hash Map ---- Splay Tree Map)
 - Hash Map (Not Ordered) -- Hash Table (Ordered)
 - Hash Table
+
   A Hash table is defined as a data structure used to insert, look up, and remove key-value pairs quickly.
   It operates on the hashing concept,
   where each key is translated by a hash function into a distinct index in an array.
@@ -90,4 +91,4 @@
 
 - Find Sum of 2 Numbers in sorted List
   1. Brute Force (Bad)
-  2. 2 Pointers
+  2. Two Pointers
