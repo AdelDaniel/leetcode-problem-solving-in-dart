@@ -56,7 +56,7 @@
 ### Hard Problems
 
 - https://leetcode.com/problems/first-missing-positive/description/
--
+- Very Hard with idea: https://leetcode.com/problems/longest-valid-parentheses/description/
 
 ### Topics
 
