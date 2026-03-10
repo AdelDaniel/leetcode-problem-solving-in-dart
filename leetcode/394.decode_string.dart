@@ -17,46 +17,85 @@ void main() {
 }
 
 class Solution {
-  /// Slower than the previous solution But I think it is easier.
+  /// Good an AI answer, I think it is the best solution for this problem.
   String decodeString(String s) {
-    final StringBuffer sbResult = StringBuffer();
-    final List<String> subStringStack = [];
-    final StringBuffer sbRepeatNumber = StringBuffer();
-    final List<String> stack = [];
+    List<int> numStack = [];
+    List<String> strStack = [];
+    StringBuffer sb = StringBuffer();
+    int len = s.length;
+    int i = 0;
 
-    for (var i = 0; i < s.length; i++) {
-      if (s[i] != ']') {
-        stack.add(s[i]);
-        continue;
+    while (i < len) {
+      String ch = s[i];
+      if (RegExp(r'\d').hasMatch(ch)) {
+        // Build the full number (could be multi-digit)
+        int num = int.parse(ch);
+        while (i + 1 < len && RegExp(r'\d').hasMatch(s[i + 1])) {
+          num = num * 10 + int.parse(s[i + 1]);
+          i++;
+        }
+        numStack.add(num);
+      } else if (ch == '[') {
+        // Save current string and start a new one for the content inside brackets
+        strStack.add(sb.toString());
+        sb.clear();
+      } else if (ch == ']') {
+        // Pop the last number and previous string, then repeat the current sb content
+        int k = numStack.removeLast();
+        StringBuffer tmp = StringBuffer(strStack.removeLast());
+        for (int j = 0; j < k; j++) {
+          tmp.write(sb.toString());
+        }
+        sb = tmp;
+      } else {
+        // Regular character, just append
+        sb.write(ch);
       }
-
-      /// Get the subString
-      do {
-        final last = stack.removeLast();
-        subStringStack.add(last);
-      } while (stack.last != '[');
-      stack.removeLast();
-      final String subString = subStringStack.join();
-
-      /// Get the repeat number
-      do {
-        sbRepeatNumber.write(stack.removeLast());
-      } while (stack.isNotEmpty && RegExp(r'\d').hasMatch(stack.last));
-      final int repeatNumber =
-          int.parse(sbRepeatNumber.toString().split('').reversed.join());
-
-      subStringStack.clear();
-      sbRepeatNumber.clear();
-
-      stack.add(subString * repeatNumber);
+      i++;
     }
-
-    do {
-      sbResult.write(stack.removeLast());
-    } while (stack.isNotEmpty);
-
-    return sbResult.toString().toString().split('').reversed.join();
+    return sb.toString();
   }
+
+  // /// Slower than the previous solution But I think it is easier.
+  // String decodeString(String s) {
+  //   final StringBuffer sbResult = StringBuffer();
+  //   final List<String> subStringStack = [];
+  //   final StringBuffer sbRepeatNumber = StringBuffer();
+  //   final List<String> stack = [];
+
+  //   for (var i = 0; i < s.length; i++) {
+  //     if (s[i] != ']') {
+  //       stack.add(s[i]);
+  //       continue;
+  //     }
+
+  //     /// Get the subString
+  //     do {
+  //       final last = stack.removeLast();
+  //       subStringStack.add(last);
+  //     } while (stack.last != '[');
+  //     stack.removeLast();
+  //     final String subString = subStringStack.join();
+
+  //     /// Get the repeat number
+  //     do {
+  //       sbRepeatNumber.write(stack.removeLast());
+  //     } while (stack.isNotEmpty && RegExp(r'\d').hasMatch(stack.last));
+  //     final int repeatNumber =
+  //         int.parse(sbRepeatNumber.toString().split('').reversed.join());
+
+  //     subStringStack.clear();
+  //     sbRepeatNumber.clear();
+
+  //     stack.add(subString * repeatNumber);
+  //   }
+
+  //   do {
+  //     sbResult.write(stack.removeLast());
+  //   } while (stack.isNotEmpty);
+
+  //   return sbResult.toString().toString().split('').reversed.join();
+  // }
 
   ////! Accepted from the first time
   ////! Try to find another solution
