@@ -1,3 +1,4 @@
+// leetcode/394.decode_string.dart
 // https://leetcode.com/problems/decode-string/
 import 'package:test/test.dart';
 
@@ -16,66 +17,107 @@ void main() {
 }
 
 class Solution {
-  ////! Accepted from the first time
-  ////! Try to find another solution
+  /// Slower than the previous solution But I think it is easier.
   String decodeString(String s) {
     final StringBuffer sbResult = StringBuffer();
-    String subString = "";
+    final List<String> subStringStack = [];
+    final StringBuffer sbRepeatNumber = StringBuffer();
     final List<String> stack = [];
+
     for (var i = 0; i < s.length; i++) {
-      final char = s[i];
-      if (char == ']') {
-        String lastChar = stack.removeLast();
-
-        /// Get the substring needed to be repeated
-        /// Add all the chars in the [] in the substring to repeat
-        while (lastChar != '[') {
-          subString = lastChar + subString;
-          lastChar = stack.removeLast();
-        }
-        lastChar = stack.last;
-        int number = 0;
-        int tens = 1;
-
-        /// Get the repeat number
-        while (lastChar.startsWith(RegExp(r'[0-9]'))) {
-          stack.removeLast();
-          number += int.parse(lastChar) * tens;
-          tens *= 10;
-          if (stack.isNotEmpty) {
-            lastChar = stack.last;
-          } else {
-            break;
-          }
-        }
-
-        /// Check if the stack is empty:
-        /// Then I will add the substring to the result
-        /// Else Then I need to repeat this again and add this to the stack
-        if (stack.isNotEmpty) {
-          stack.add(subString * number);
-        } else {
-          sbResult.write(subString * number);
-        }
-        subString = "";
-        number = 0;
-        tens = 1;
-      } else if (char == '[') {
-        stack.add(char);
-      } else if (char.startsWith(RegExp(r'[0-9]'))) {
-        stack.add(char);
-      } else {
-        /// If the string not in the [] then add it to the string result without repeat
-        if (stack.isEmpty) {
-          sbResult.write(char);
-        } else {
-          stack.add(char);
-        }
+      if (s[i] != ']') {
+        stack.add(s[i]);
+        continue;
       }
+
+      /// Get the subString
+      do {
+        final last = stack.removeLast();
+        subStringStack.add(last);
+      } while (stack.last != '[');
+      stack.removeLast();
+      final String subString = subStringStack.join();
+
+      /// Get the repeat number
+      do {
+        sbRepeatNumber.write(stack.removeLast());
+      } while (stack.isNotEmpty && RegExp(r'\d').hasMatch(stack.last));
+      final int repeatNumber =
+          int.parse(sbRepeatNumber.toString().split('').reversed.join());
+
+      subStringStack.clear();
+      sbRepeatNumber.clear();
+
+      stack.add(subString * repeatNumber);
     }
 
-    return sbResult.toString();
+    do {
+      sbResult.write(stack.removeLast());
+    } while (stack.isNotEmpty);
+
+    return sbResult.toString().toString().split('').reversed.join();
   }
+
+  ////! Accepted from the first time
+  ////! Try to find another solution
+//   String decodeString(String s) {
+//     final StringBuffer sbResult = StringBuffer();
+//     String subString = "";
+//     final List<String> stack = [];
+//     for (var i = 0; i < s.length; i++) {
+//       final char = s[i];
+//       if (char == ']') {
+//         String lastChar = stack.removeLast();
+
+//         /// Get the substring needed to be repeated
+//         /// Add all the chars in the [] in the substring to repeat
+//         while (lastChar != '[') {
+//           subString = lastChar + subString;
+//           lastChar = stack.removeLast();
+//         }
+//         lastChar = stack.last;
+//         int number = 0;
+//         int tens = 1;
+
+//         /// Get the repeat number
+//         while (lastChar.startsWith(RegExp(r'[0-9]'))) {
+//           stack.removeLast();
+//           number += int.parse(lastChar) * tens;
+//           tens *= 10;
+//           if (stack.isNotEmpty) {
+//             lastChar = stack.last;
+//           } else {
+//             break;
+//           }
+//         }
+
+//         /// Check if the stack is empty:
+//         /// Then I will add the substring to the result
+//         /// Else Then I need to repeat this again and add this to the stack
+//         if (stack.isNotEmpty) {
+//           stack.add(subString * number);
+//         } else {
+//           sbResult.write(subString * number);
+//         }
+//         subString = "";
+//         number = 0;
+//         tens = 1;
+//       } else if (char == '[') {
+//         stack.add(char);
+//       } else if (char.startsWith(RegExp(r'[0-9]'))) {
+//         stack.add(char);
+//       } else {
+//         /// If the string not in the [] then add it to the string result without repeat
+//         if (stack.isEmpty) {
+//           sbResult.write(char);
+//         } else {
+//           stack.add(char);
+//         }
+//       }
+//     }
+
+//     return sbResult.toString();
+//   }
 }
 
 void runTests() {
