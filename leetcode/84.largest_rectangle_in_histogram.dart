@@ -6,28 +6,53 @@ import 'package:test/test.dart';
 
 void main() {
   final stopwatch = Stopwatch()..start();
-  runTests();
 
   final Solution s = Solution();
-  s.largestRectangleArea([2, 1, 5, 6, 2, 3]);
+  // s.largestRectangleArea([2, 1, 5, 6, 2, 3]);
+  s.largestRectangleArea([4, 2, 0, 3, 2, 5]);
 
+  runTests();
   stopwatch.stop();
   print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro sec');
 }
 
 class Solution {
-  /// Time limit
+  ////! TC: O(N) SC: O(N)
   int largestRectangleArea(List<int> heights) {
     int maxArea = 0;
-    for (int i = 0; i < heights.length; i++) {
-      int minHeight = heights[i];
-      for (int j = i; j < heights.length; j++) {
-        minHeight = min(minHeight, heights[j]);
-        maxArea = max(maxArea, minHeight * (j - i + 1));
+    final List<int> increasingStack = <int>[];
+    increasingStack.add(0);
+
+    for (int i = 1; i <= heights.length; i++) {
+      int currentHeight = i < heights.length ? heights[i] : -1;
+
+      while (increasingStack.isNotEmpty &&
+          currentHeight <= heights[increasingStack.last]) {
+        final lastPeakIndex = increasingStack.removeLast();
+        final lastPeakHeight = heights[lastPeakIndex];
+        final width =
+            increasingStack.isEmpty ? i : (i - increasingStack.last - 1);
+        final area = lastPeakHeight * width;
+        maxArea = max(maxArea, area);
       }
+      increasingStack.add(i);
     }
     return maxArea;
   }
+
+  ////! Time limit O(n^2) solution,
+  ////! Not efficient for large inputs but works correctly.
+  // int largestRectangleArea(List<int> heights) {
+  //   int maxArea = 0;
+  //   for (int i = 0; i < heights.length; i++) {
+  //     int minHeight = heights[i];
+  //     for (int j = i; j < heights.length; j++) {
+  //       minHeight = min(minHeight, heights[j]);
+  //       maxArea = max(maxArea, minHeight * (j - i + 1));
+  //     }
+  //   }
+  //   return maxArea;
+  // }
 }
 
 void runTests() {
