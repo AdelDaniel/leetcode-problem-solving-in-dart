@@ -19,30 +19,30 @@ void main() {
 
 class Solution {
   ////! Good Solution O(N)
-  /// Found this solution on the internet
-  /// I think it is the best solution for this problem.
   int maxSubArray(List<int> nums) {
+    int current = nums[0];
     int maxSum = nums[0];
-    int currentSum = 0;
 
-    for (int i = 0; i < nums.length; i++) {
-      currentSum += nums[i];
-      maxSum = max(maxSum, currentSum);
-      if (currentSum < 0) currentSum = 0;
+    for (int i = 1; i < nums.length; i++) {
+      current = max(nums[i], current + nums[i]);
+      maxSum = max(maxSum, current);
     }
+
     return maxSum;
   }
 
   ////! Good Solution O(N)
+  /// Found this solution on the internet
+  /// I think it is the best solution for this problem.
   // int maxSubArray(List<int> nums) {
-  //   int current = nums[0];
   //   int maxSum = nums[0];
+  //   int currentSum = 0;
 
-  //   for (int i = 1; i < nums.length; i++) {
-  //     current = max(nums[i], current + nums[i]);
-  //     maxSum = max(maxSum, current);
+  //   for (int i = 0; i < nums.length; i++) {
+  //     currentSum += nums[i];
+  //     maxSum = max(maxSum, currentSum);
+  //     if (currentSum < 0) currentSum = 0;
   //   }
-
   //   return maxSum;
   // }
 
