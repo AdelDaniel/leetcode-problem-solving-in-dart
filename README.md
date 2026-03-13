@@ -52,7 +52,7 @@
 - https://leetcode.com/problems/sort-colors/description/
 - Medium but Very Hard: https://leetcode.com/problems/3sum/
 - https://leetcode.com/problems/asteroid-collision/
-- https://leetcode.com/problems/decode-string/ 
+- https://leetcode.com/problems/decode-string/
 
 ### Hard Problems
 
@@ -76,6 +76,7 @@
 - Mark Indices --> By negative value
 - Sliding Window
 - Stack (DS)
+- Monotonic Stack
 
 ### Algorithms
 
@@ -96,3 +97,45 @@
 - Find Sum of 2 Numbers in sorted List
   1. Brute Force (Bad)
   2. Two Pointers
+
+---
+
+# Your solving strategy
+
+Use this process every time:
+
+### Step 1
+
+Write the brute force.
+
+### Step 2
+
+Measure its complexity.
+
+### Step 3
+
+Find the bottleneck:
+
+- too many states?
+- repeated work?
+- unnecessary storage?
+
+### Step 4
+
+Redefine the problem in a smaller form:
+
+- ending here
+- starting here
+- up to here
+
+### Step 5
+
+Write the recurrence.
+
+### Step 6
+
+Optimize memory.
+
+That is how you grow from “I can code solutions” to “I can derive solutions.”
+
+---
