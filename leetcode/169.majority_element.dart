@@ -16,31 +16,52 @@ void main() {
 }
 
 class Solution {
-  /// Solved O(n) time and O(n) space with HashMap
+  ////! Solved TC: O(N) SC: O(1)
+  ////! Algorithm used: (moore voting algorithm)
+  ////! Used when:[Repeated > (length / 2)]
+  ////! This solution is valid Because the most repeated value must be bigger than > n/2
   int majorityElement(List<int> nums) {
-    final Map hashMap = <int, int>{
-      nums[0]: 1,
-    };
-    int maxRepeatedKey = nums[0];
-    int maxRepeatedValue = 1;
+    int value = nums[0];
+    int count = 1;
     for (int i = 1; i < nums.length; i++) {
-      int newValue;
-      int key = nums[i];
-      if (!hashMap.containsKey(key)) {
-        hashMap[key] = 1;
-        newValue = 1;
+      if (count == 0) {
+        count = 1;
+        value = nums[i];
+      } else if (nums[i] == value) {
+        count++;
       } else {
-        newValue = (hashMap[key]) + 1;
-        hashMap[key] = newValue;
-      }
-      if (newValue > maxRepeatedValue) {
-        maxRepeatedValue = newValue;
-        maxRepeatedKey = key;
+        count--;
       }
     }
 
-    return maxRepeatedKey;
+    return value;
   }
+
+  ////! Solved O(n) time and O(n) space with HashMap
+  // int majorityElement(List<int> nums) {
+  //   final Map hashMap = <int, int>{
+  //     nums[0]: 1,
+  //   };
+  //   int maxRepeatedKey = nums[0];
+  //   int maxRepeatedValue = 1;
+  //   for (int i = 1; i < nums.length; i++) {
+  //     int newValue;
+  //     int key = nums[i];
+  //     if (!hashMap.containsKey(key)) {
+  //       hashMap[key] = 1;
+  //       newValue = 1;
+  //     } else {
+  //       newValue = (hashMap[key]) + 1;
+  //       hashMap[key] = newValue;
+  //     }
+  //     if (newValue > maxRepeatedValue) {
+  //       maxRepeatedValue = newValue;
+  //       maxRepeatedKey = key;
+  //     }
+  //   }
+
+  //   return maxRepeatedKey;
+  // }
 }
 
 void runTests() {

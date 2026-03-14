@@ -77,6 +77,8 @@
 - Sliding Window
 - Stack (DS)
 - Monotonic Stack
+- moore voting algorithm
+- Kaden's Algorithm
 
 ### Algorithms
 
