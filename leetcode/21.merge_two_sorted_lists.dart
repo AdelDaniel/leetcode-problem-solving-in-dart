@@ -24,40 +24,56 @@ class ListNode {
 }
 
 class Solution {
-  /// Not recursion Solution
-  // TODO: Do it in the recursion.
+  /// Best Recursion Solution
+  /// Efficient
   ListNode? mergeTwoLists(ListNode? list1, ListNode? list2) {
     if (list1 == null && list2 == null) return null;
     if (list1 == null) return list2;
     if (list2 == null) return list1;
 
-    final List<int> result = [];
-    ListNode? list1Next = list1;
-    ListNode? list2Next = list2;
-
-    while (list1Next != null || list2Next != null) {
-      if (list1Next == null) {
-        result.add(list2Next!.val);
-        list2Next = list2Next.next;
-      } else if (list2Next == null) {
-        result.add(list1Next.val);
-        list1Next = list1Next.next;
-      } else if (list1Next.val < list2Next.val) {
-        result.add(list1Next.val);
-        list1Next = list1Next.next;
-      } else {
-        result.add(list2Next.val);
-        list2Next = list2Next.next;
-      }
+    if (list1.val < list2.val) {
+      list1.next = mergeTwoLists(list1.next, list2);
+      return list1;
+    } else {
+      list2.next = mergeTwoLists(list2.next, list1);
+      return list2;
     }
-    ListNode? resultNext;
-
-    for (var i = result.length - 1; i >= 0; i--) {
-      resultNext = ListNode(result[i], resultNext);
-    }
-
-    return resultNext;
   }
+
+  ///
+  /// Not recursion Solution
+  // ListNode? mergeTwoLists(ListNode? list1, ListNode? list2) {
+  //   if (list1 == null && list2 == null) return null;
+  //   if (list1 == null) return list2;
+  //   if (list2 == null) return list1;
+
+  //   final List<int> result = [];
+  //   ListNode? list1Next = list1;
+  //   ListNode? list2Next = list2;
+
+  //   while (list1Next != null || list2Next != null) {
+  //     if (list1Next == null) {
+  //       result.add(list2Next!.val);
+  //       list2Next = list2Next.next;
+  //     } else if (list2Next == null) {
+  //       result.add(list1Next.val);
+  //       list1Next = list1Next.next;
+  //     } else if (list1Next.val < list2Next.val) {
+  //       result.add(list1Next.val);
+  //       list1Next = list1Next.next;
+  //     } else {
+  //       result.add(list2Next.val);
+  //       list2Next = list2Next.next;
+  //     }
+  //   }
+  //   ListNode? resultNext;
+
+  //   for (var i = result.length - 1; i >= 0; i--) {
+  //     resultNext = ListNode(result[i], resultNext);
+  //   }
+
+  //   return resultNext;
+  // }
 }
 
 /// ---------- Helper Methods ----------
