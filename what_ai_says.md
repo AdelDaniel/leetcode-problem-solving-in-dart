@@ -1,8 +1,6 @@
 # What AI says.
 
-## Question
-
-- Give me a recommendation for the Data Structure and Algorithm course.
+## Question: Give me a recommendation for the Data Structure and Algorithm course?
 
 - Also if you have a better idea of how some one learn it in the best way so he can use it in his work, interview, and his life tell me the best way too.
 
@@ -83,3 +81,88 @@ If you want, I can turn this into a **personal day-by-day DSA roadmap** based on
 [4]: https://leetcode.com/explore/featured/card/leetcodes-interview-crash-course-data-structures-and-algorithms/?utm_source=chatgpt.com "LeetCode's Interview Crash Course"
 [5]: https://neetcode.io/roadmap?utm_source=chatgpt.com "Roadmap"
 [6]: https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/?utm_source=chatgpt.com "Introduction to Algorithms"
+
+---
+
+## 🎯 Good Leetcode Rank
+
+### 🔹 Stage 1 – Structured Foundation
+
+**Target Rank:** Under **500,000**
+**Time Frame:** 6–8 weeks
+
+- Solve **150–200 total problems**
+- 70% Easy, 30% Medium
+- Master:
+  - Arrays
+  - Strings
+  - Two Pointers
+  - Sliding Window
+  - Binary Search
+  - HashMap usage
+
+- Redo wrong problems after 3–5 days
+- Start 1 contest every 2 weeks (no pressure)
+
+✅ If you reach this:
+
+- Easy problems feel trivial
+- You recognize patterns instead of guessing
+- You stop brute-forcing everything
+
+You are no longer random. You are structured.
+
+---
+
+### 🔹 Stage 2 – Pattern Control
+
+**Target Rank:** Under **200,000–100,000**
+**Time Frame:** Next 8–10 weeks
+
+- Reach **300–400 total problems**
+- 60% Medium
+- Master:
+  - Recursion
+  - Backtracking
+  - Trees (DFS/BFS)
+  - Graph basics
+  - Heaps / Priority Queue
+
+- Solve Medium in 25–35 minutes
+- Join weekly contests consistently
+
+✅ If you reach this:
+
+- You think in patterns
+- You optimize naturally
+- You can explain solutions clearly
+
+Now you're truly interview ready.
+
+---
+
+### 🔹 Stage 3 – Algorithmic Maturity
+
+**Target Rank:** Under **50,000–20,000**
+**Time Frame:** 3–6 months after Stage 2
+
+- 500+ problems
+- Comfortable with Hard problems
+- Master:
+  - Dynamic Programming patterns
+  - Greedy proofs
+  - Advanced Graph (Dijkstra, Union-Find)
+  - Monotonic stack
+
+- Solve 2–3 Medium in one contest
+- Occasionally solve a Hard fully
+
+✅ If you reach this:
+
+- You are dangerous in interviews
+- You think in optimization first
+- You debug faster than most engineers
+
+This is elite problem-solving level.
+
+---
