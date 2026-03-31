@@ -79,6 +79,10 @@
 - Monotonic Stack
 - moore voting algorithm
 - Kaden's Algorithm
+- Sorting:
+  - Bubble Sort
+  - Selection Sort
+  - Merge Sort
 
 ### Algorithms
 
