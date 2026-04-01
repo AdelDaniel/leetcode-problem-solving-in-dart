@@ -62,6 +62,41 @@ class Solution {
       nums[k++] = rightList[j++];
     }
   }
+
+  /// ! Dangerous --> Stack over flow
+  /// Solved with Quick Sort
+  /// Divide and conquer
+  /// TC: O(n)
+  /// SC: O(Log(n))
+  // int findKthLargest(List<int> nums, int k) {
+  //   return quickSort(nums, 0, nums.length - 1, nums.length - k);
+  // }
+
+  // int quickSort(List<int> nums, int low, int high, int k) {
+  //   final int pivotIndex = _partition(nums, low, high);
+  //   if (pivotIndex == k) return nums[pivotIndex];
+  //   if (k > pivotIndex) {
+  //     return quickSort(nums, pivotIndex + 1, high, k);
+  //   } else {
+  //     return quickSort(nums, low, pivotIndex - 1, k);
+  //   }
+  // }
+
+  // int _partition(List<int> nums, int low, int high) {
+  //   int i = low - 1;
+  //   int pivotIndex = high;
+  //   int pivot = nums[pivotIndex];
+
+  //   for (var j = low; j <= high; j++) {
+  //     if (nums[j] <= pivot) {
+  //       i++;
+  //       final temp = nums[i];
+  //       nums[i] = nums[j];
+  //       nums[j] = temp;
+  //     }
+  //   }
+  //   return i;
+  // }
 }
 
 void runTests() {
