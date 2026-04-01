@@ -1,18 +1,29 @@
 // sorting.dart
 import 'dart:developer';
 
+import 'package:test/test.dart';
+
 void main() {
   final List<int> nums = [100, 33, 52, 12, 55, 66, 44];
   final Sorting sorting = Sorting();
 
   // sorting.selectionSort(nums);
-  sorting.bubbleSort(nums);
+  // sorting.bubbleSort(nums);
+  // sorting.mergeSort(nums);
+  sorting.quickSort(nums);
   log(nums.toString());
+
+  runTests();
 }
 
 class Sorting {
   const Sorting();
+  List<int> sortArray(List<int> nums) {
+    quickSort(nums);
+    return nums;
+  }
 
+  /// MARK: Selection Sort
   /// Selection Sort: is a comparison-based sorting algorithm.
   /// TS: O(n^2)
   /// It sorts by repeatedly selecting the smallest (or largest) element from the unsorted portion and swapping it with the first unsorted element.
@@ -39,6 +50,7 @@ class Sorting {
     }
   }
 
+  /// MARK: Bubble Sort
   /// Bubble Sort: is the simplest sorting algorithm that works by repeatedly swapping
   /// TS: O(n^2)
   /// the adjacent elements if they are in the wrong order.
@@ -62,7 +74,7 @@ class Sorting {
     }
   }
 
-  /// Merge Sort
+  /// MARK: Merge Sort
   /// TS: O(n log n)
   /// SC: O(n)
   /// Merge sort is a popular sorting algorithm known for its efficiency and stability.
@@ -127,4 +139,103 @@ class Sorting {
       nums[k++] = rightList[j++];
     }
   }
+
+  /// MARK: Quick Sort
+  /// QuickSort is a sorting algorithm based on the Divide and Conquer that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array. 
+  /// There are mainly three steps in the algorithm:
+  /// Choose a Pivot: Select an element from the array as the pivot. The choice of pivot can vary (e.g., first element, last element, random element, or median).
+  /// Partition the Array: Re arrange the array around the pivot. After partitioning, all elements smaller than the pivot will be on its left, and all elements greater than the pivot will be on its right.
+  /// Recursively Call: Recursively apply the same process to the two partitioned sub-arrays.
+  /// Base Case: The recursion stops when there is only one element left in the sub-array, as a single element is already sorted.
+
+  void quickSort(List<int> nums) {
+    _pivotSort(nums, 0, nums.length - 1);
+  }
+
+  void _pivotSort(List<int> nums, int low, int high) {
+    if (low < high) {
+      final pivot = _partition(nums, low, high);
+      _pivotSort(nums, low, pivot - 1);
+      _pivotSort(nums, pivot + 1, high);
+    }
+  }
+
+  int _partition(List<int> nums, int low, int high) {
+    int pivot = high;
+    int i = low - 1;
+    for (var j = low; j < high; j++) {
+      if (nums[j] < nums[pivot]) {
+        i++;
+        final temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+      }
+    }
+
+    i++;
+    final temp = nums[i];
+    nums[i] = nums[pivot];
+    nums[pivot] = temp;
+    return i;
+  }
+}
+
+void runTests() {
+  final Sorting s = Sorting();
+
+  group('Sort An Array', () {
+    // Basic examples from problem statement
+    test('Example 1: [5,2,3,1] → [1,2,3,5]', () {
+      expect(s.sortArray([5, 2, 3, 1]), equals([1, 2, 3, 5]));
+    });
+
+    test('Example 2: [5,1,1,2,0,0] → [0,0,1,1,2,5]', () {
+      expect(s.sortArray([5, 1, 1, 2, 0, 0]), equals([0, 0, 1, 1, 2, 5]));
+    });
+
+    // Edge Cases
+    test('Single element: [1] → [1]', () {
+      expect(s.sortArray([1]), equals([1]));
+    });
+
+    test('Already sorted: [1,2,3,4,5] → [1,2,3,4,5]', () {
+      expect(s.sortArray([1, 2, 3, 4, 5]), equals([1, 2, 3, 4, 5]));
+    });
+
+    test('Reverse sorted: [5,4,3,2,1] → [1,2,3,4,5]', () {
+      expect(s.sortArray([5, 4, 3, 2, 1]), equals([1, 2, 3, 4, 5]));
+    });
+
+    test('All elements same: [2,2,2,2] → [2,2,2,2]', () {
+      expect(s.sortArray([2, 2, 2, 2]), equals([2, 2, 2, 2]));
+    });
+
+    // Negative Values
+    test('Mixed positive and negative: [-5, 2, -1, 0, 3] → [-5, -1, 0, 2, 3]',
+        () {
+      expect(s.sortArray([-5, 2, -1, 0, 3]), equals([-5, -1, 0, 2, 3]));
+    });
+
+    test('All negative: [-10, -1, -5, -2] → [-10, -5, -2, -1]', () {
+      expect(s.sortArray([-10, -1, -5, -2]), equals([-10, -5, -2, -1]));
+    });
+
+    // Larger Data and Ranges
+    test(
+        'Large numbers within constraints: [-50000, 50000, 0] → [-50000, 0, 50000]',
+        () {
+      expect(s.sortArray([-50000, 50000, 0]), equals([-50000, 0, 50000]));
+    });
+
+    test('Large random array performance check', () {
+      final input = List.generate(10000, (i) => 10000 - i);
+      final expected = List.generate(10000, (i) => i + 1);
+      expect(s.sortArray(input), equals(expected));
+    });
+
+    // Duplicate handling
+    test('Heavy duplicates: [1,2,1,2,1,2] → [1,1,1,2,2,2]', () {
+      expect(s.sortArray([1, 2, 1, 2, 1, 2]), equals([1, 1, 1, 2, 2, 2]));
+    });
+  });
 }
