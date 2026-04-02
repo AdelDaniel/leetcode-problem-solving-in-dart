@@ -18,6 +18,7 @@ void main() {
 }
 
 class Solution {
+  /// TS: O(n*m) SC: O(n*m)
   List<List<int>> transpose(List<List<int>> matrix) {
     final int rows = matrix.length;
     final int columns = matrix.first.length;
