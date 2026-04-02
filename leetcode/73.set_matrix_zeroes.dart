@@ -1,4 +1,4 @@
-// leetcode/leetcode/73.set_matrix_zeroes.dart
+// leetcode/73.set_matrix_zeroes.dart
 // https://leetcode.com/problems/set-matrix-zeroes/
 
 import 'package:test/test.dart';
@@ -23,6 +23,8 @@ class Solution {
   /// Not best Space Complexity  Solution
   /// SC: O(N+M)
   /// TC: O(n*m)
+  /// Easier Than the commented one,
+  /// But the commented one is with less space complexity
   void setZeroes(List<List<int>> matrix) {
     Set<int> rowsIndex = {};
     Set<int> columnsIndex = {};
@@ -43,6 +45,47 @@ class Solution {
       }
     }
   }
+
+  //// ! Better Space Complexity
+  /// SC: O(1);
+  // void setZeroes(List<List<int>> matrix) {
+  //   bool isFirstRowHasZero = false;
+  //   bool isFirstColumnHasZero = false;
+  //   for (var i = 0; i < matrix.length; i++) {
+  //     for (var j = 0; j < matrix.first.length; j++) {
+  //       if (matrix[i][j] == 0) {
+  //         if (i == 0) isFirstRowHasZero = true;
+  //         if (j == 0) isFirstColumnHasZero = true;
+  //         matrix[0][j] = 0;
+  //         matrix[i][0] = 0;
+  //       }
+  //     }
+  //   }
+
+  //   for (var i = 1; i < matrix.length; i++) {
+  //     for (var j = 1; j < matrix.first.length; j++) {
+  //       /// Replace Rows
+  //       if (matrix[i][0] == 0) matrix[i][j] = 0;
+
+  //       /// Replace Columns
+  //       if (matrix[0][j] == 0) matrix[i][j] = 0;
+  //     }
+  //   }
+
+  //   if (isFirstRowHasZero) {
+  //     /// Iterate all Columns with Row i = 0;
+  //     for (var i = 0; i < matrix.first.length; i++) {
+  //       matrix[0][i] = 0;
+  //     }
+  //   }
+
+  //   if (isFirstColumnHasZero) {
+  //     /// Iterate all rows with Column c = 0;
+  //     for (var c = 0; c < matrix.length; c++) {
+  //       matrix[c][0] = 0;
+  //     }
+  //   }
+  // }
 }
 
 void runTests() {
