@@ -83,6 +83,11 @@
   - Bubble Sort
   - Selection Sort
   - Merge Sort
+  - Quick Sort
+- Matrix
+  - Diagonal Sum (Primary Diagonal & Secondary Diagonal)
+  - Transpose Matrix.
+  -
 
 ### Algorithms
 
