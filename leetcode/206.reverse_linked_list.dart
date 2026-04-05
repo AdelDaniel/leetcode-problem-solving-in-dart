@@ -20,20 +20,34 @@ class ListNode {
 }
 
 class Solution {
+  /// work with recursion
   ListNode? reverseList(ListNode? head) {
-    if (head == null || head.next == null) return head;
-    ListNode? currentHead = head;
-    ListNode? nextHead = head.next;
-    currentHead.next = null;
-    while (nextHead != null) {
-      final temp = nextHead.next;
-      nextHead.next = currentHead;
-      currentHead = nextHead;
-      nextHead = temp;
-    }
-
-    return currentHead;
+    if (head == null) return head;
+    return reverse(head, null);
   }
+
+  ListNode? reverse(ListNode? head, ListNode? newHead) {
+    if (head == null) return newHead;
+    final next = head.next;
+    head.next = newHead;
+    return reverse(next, head);
+  }
+
+  /// Solved --> Easier Solution --> Good Solution
+  // ListNode? reverseList(ListNode? head) {
+  //   if (head == null || head.next == null) return head;
+  //   ListNode? currentHead = head;
+  //   ListNode? nextHead = head.next;
+  //   currentHead.next = null;
+  //   while (nextHead != null) {
+  //     final temp = nextHead.next;
+  //     nextHead.next = currentHead;
+  //     currentHead = nextHead;
+  //     nextHead = temp;
+  //   }
+
+  //   return currentHead;
+  // }
 }
 
 ListNode? buildList(List<int> values) {
