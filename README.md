@@ -76,6 +76,8 @@
 - Mark Indices --> By negative value
 - Sliding Window
 - Stack (DS)
+- Linked List
+  - 2 Pointers (876.middle_of_the_linked_list.dart)
 - Monotonic Stack
 - moore voting algorithm
 - Kaden's Algorithm
@@ -87,7 +89,7 @@
 - Matrix
   - Diagonal Sum (Primary Diagonal & Secondary Diagonal)
   - Transpose Matrix.
-  -
+  - Rotate Matrix 
 
 ### Algorithms
 
