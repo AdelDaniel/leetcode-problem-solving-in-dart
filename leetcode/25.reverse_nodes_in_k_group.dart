@@ -22,19 +22,41 @@ class ListNode {
 class Solution {
   ListNode? reverseKGroup(ListNode? head, int k) {
     if (head == null || head.next == null || k == 0) return head;
+
+    /// Get the tail of the current List
+    ListNode? tail = head;
+    for (var i = 0; i < k - 1; i++) {
+      tail = tail?.next;
+      if (tail == null) {
+        return head;
+      }
+    }
+
+    ListNode? nextHead = tail?.next;
+    tail?.next = null;
+    final lastNode = reverseKGroup(nextHead, k);
+    final newHeadAfterReverse = reverseSubList(head);
+
+    ListNode? newTailAfterReverse = newHeadAfterReverse;
+    while (newTailAfterReverse?.next != null) {
+      newTailAfterReverse = newTailAfterReverse?.next;
+    }
+
+    newTailAfterReverse?.next = lastNode;
+    return newHeadAfterReverse;
+  }
+
+  ListNode? reverseSubList(ListNode? head) {
+    if (head == null || head.next == null) return head;
     ListNode? currentHead = head;
     ListNode? nextHead = head.next;
     currentHead.next = null;
+
     while (nextHead != null) {
-      if (k == 1) {
-        // currentHead =
-        break;
-      }
       final temp = nextHead.next;
       nextHead.next = currentHead;
       currentHead = nextHead;
       nextHead = temp;
-      k--;
     }
 
     return currentHead;
