@@ -21,20 +21,33 @@ class ListNode {
 
 class Solution {
   /// Recursion Solution
-  /// Good
+  /// Good And Better SC 
+  // ListNode? swapPairs(ListNode? head) {
+  //   if (head == null || head.next == null) return head;
+  //   ListNode? first = head;
+  //   ListNode? second = head.next;
+  //   return swap(first, second);
+  // }
+
+  // ListNode? swap(ListNode? first, ListNode? second) {
+  //   if (first == null || second == null) return first;
+  //   final secondSwappedNode = swap(second.next, second.next?.next);
+  //   second.next = first;
+  //   first.next = secondSwappedNode;
+  //   return second;
+  // }
+
+  /// Easy solution
   ListNode? swapPairs(ListNode? head) {
     if (head == null || head.next == null) return head;
-    ListNode? first = head;
-    ListNode? second = head.next;
-    return swap(first, second);
-  }
-
-  ListNode? swap(ListNode? first, ListNode? second) {
-    if (first == null || second == null) return first;
-    final secondSwappedNode = swap(second.next, second.next?.next);
-    second.next = first;
-    first.next = secondSwappedNode;
-    return second;
+    ListNode? node = head;
+    while (node != null && node.next != null) {
+      final temp = node.val;
+      node.val = node.next!.val;
+      node.next!.val = temp;
+      node = node.next?.next;
+    }
+    return head;
   }
 }
 
