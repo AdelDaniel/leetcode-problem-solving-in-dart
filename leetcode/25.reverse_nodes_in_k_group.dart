@@ -34,7 +34,7 @@ class Solution {
 
     ListNode? nextHead = tail?.next;
     tail?.next = null;
-    final lastNode = reverseKGroup(nextHead, k);
+    final updatedNextHead = reverseKGroup(nextHead, k);
     final newHeadAfterReverse = reverseSubList(head);
 
     ListNode? newTailAfterReverse = newHeadAfterReverse;
@@ -42,7 +42,7 @@ class Solution {
       newTailAfterReverse = newTailAfterReverse?.next;
     }
 
-    newTailAfterReverse?.next = lastNode;
+    newTailAfterReverse?.next = updatedNextHead;
     return newHeadAfterReverse;
   }
 
