@@ -78,6 +78,8 @@
 - Stack (DS)
 - Linked List
   - 2 Pointers (876.middle_of_the_linked_list.dart)
+    - Fast & Slow Pointers
+  - Reverse
 - Monotonic Stack
 - moore voting algorithm
 - Kaden's Algorithm
@@ -89,7 +91,7 @@
 - Matrix
   - Diagonal Sum (Primary Diagonal & Secondary Diagonal)
   - Transpose Matrix.
-  - Rotate Matrix 
+  - Rotate Matrix
 
 ### Algorithms
 
