@@ -22,6 +22,7 @@ class TreeNode {
 }
 
 class Solution {
+  /// Good Solution
   List<List<int>> zigzagLevelOrder(TreeNode? root) {
     final List<List<int>> result = [];
     if (root == null) return result;
@@ -29,14 +30,14 @@ class Solution {
     final List<TreeNode> queue = [];
 
     queue.add(root);
-    bool isRTL = true;
+    int currentLevel = 0;
 
     while (queue.isNotEmpty) {
       int size = queue.length;
       final List<int> newLevel = [];
       while (size > 0) {
         final visitedNode = queue.removeAt(0);
-        isRTL
+        currentLevel % 2 == 0
             ? newLevel.add(visitedNode.val)
             : newLevel.insert(0, visitedNode.val);
         if (visitedNode.left != null) queue.add(visitedNode.left!);
@@ -44,7 +45,7 @@ class Solution {
         size--;
       }
       result.add(newLevel);
-      isRTL = !isRTL;
+      currentLevel++;
     }
 
     return result;
