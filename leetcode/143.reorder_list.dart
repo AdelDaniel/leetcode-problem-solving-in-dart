@@ -21,30 +21,78 @@ class ListNode {
 }
 
 class Solution {
+  /// Solution with the slow and fast pointers
   void reorderList(ListNode? head) {
     if (head == null || head.next == null) return;
-    final List<ListNode> stack = [];
 
-    /// fill the stack
+    ListNode? slowNode = head;
+    ListNode? fastNode = head.next;
+    while (fastNode?.next != null) {
+      slowNode = slowNode?.next;
+      fastNode = fastNode?.next?.next;
+    }
+
+    ListNode? currentHead = slowNode?.next;
+    slowNode?.next = null;
+    final reversedListHead = reverseLinkedList(currentHead);
+
     ListNode? node = head;
+    ListNode? reversedNode = reversedListHead;
     while (node != null) {
-      stack.add(node);
-      node = node.next;
+      final nextNodeTemp = node.next;
+      final nextReversedNodeTemp = reversedNode?.next;
+
+      node.next = reversedNode;
+      reversedNode?.next = nextNodeTemp;
+
+      node = nextNodeTemp;
+      reversedNode = nextReversedNodeTemp;
+    }
+  }
+
+  ListNode? reverseLinkedList(ListNode? head) {
+    if (head == null || head.next == null) return head;
+    ListNode? currentHead = head;
+    ListNode? nextHead = head.next;
+    currentHead.next = null;
+    while (nextHead != null) {
+      final temp = nextHead.next;
+      nextHead.next = currentHead;
+      currentHead = nextHead;
+      nextHead = temp;
     }
 
-    final length = stack.length;
-    node = head;
-    for (var i = 0; i < length ~/ 2; i++) {
-      final temp = node?.next;
-      final newNode = stack.removeLast();
-      node?.next = newNode;
-      newNode.next = temp;
-      node = temp;
-    }
-
-    node?.next = null;
+    return currentHead;
   }
 }
+
+// class Solution {
+//   /// Good Solved the problem
+//   /// Stack used
+//   void reorderList(ListNode? head) {
+//     if (head == null || head.next == null) return;
+//     final List<ListNode> stack = [];
+
+//     /// fill the stack
+//     ListNode? node = head;
+//     while (node != null) {
+//       stack.add(node);
+//       node = node.next;
+//     }
+
+//     final length = stack.length;
+//     node = head;
+//     for (var i = 0; i < length ~/ 2; i++) {
+//       final temp = node?.next;
+//       final newNode = stack.removeLast();
+//       node?.next = newNode;
+//       newNode.next = temp;
+//       node = temp;
+//     }
+
+//     node?.next = null;
+//   }
+// }
 
 ListNode? buildList(List<int> values) {
   if (values.isEmpty) return null;
