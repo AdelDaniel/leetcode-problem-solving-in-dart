@@ -20,18 +20,37 @@ class ListNode {
 }
 
 class Solution {
-  /// work with recursion
+  /// Recursion Solution
   ListNode? reverseList(ListNode? head) {
-    if (head == null) return head;
-    return reverse(head, null);
+    if (head == null || head.next == null) return head;
+    return reversNode(head, head.next!);
   }
 
-  ListNode? reverse(ListNode? head, ListNode? newHead) {
-    if (head == null) return newHead;
-    final next = head.next;
-    head.next = newHead;
-    return reverse(next, head);
+  ListNode? reversNode(ListNode current, ListNode next) {
+    ListNode? head;
+    if (next.next != null) {
+      head = reversNode(current.next!, next.next!);
+    } else {
+      head = next;
+    }
+
+    current.next = null;
+    next.next = current;
+    return head;
   }
+
+  // /// work with recursion
+  // ListNode? reverseList(ListNode? head) {
+  //   if (head == null) return head;
+  //   return reverse(head, null);
+  // }
+
+  // ListNode? reverse(ListNode? head, ListNode? newHead) {
+  //   if (head == null) return newHead;
+  //   final next = head.next;
+  //   head.next = newHead;
+  //   return reverse(next, head);
+  // }
 
   /// Solved --> Easier Solution --> Good Solution
   // ListNode? reverseList(ListNode? head) {
