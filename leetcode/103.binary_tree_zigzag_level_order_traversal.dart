@@ -1,5 +1,6 @@
-// leetcode/102.binary_tree_level_order_traversal.dart
-// https://leetcode.com/problems/binary-tree-level-order-traversal/
+// leetcode/103.binary_tree_zigzag_level_order_traversal.dart
+// https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+
 import 'package:test/test.dart';
 
 void main() {
@@ -7,7 +8,7 @@ void main() {
   runTests();
 
   final Solution s = Solution();
-  s.levelOrder(buildTree([3, 9, 20, null, null, 15, 7]));
+  s.zigzagLevelOrder(buildTree([3, 9, 20, null, null, 15, 7]));
 
   stopwatch.stop();
   print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro sec');
@@ -21,30 +22,61 @@ class TreeNode {
 }
 
 class Solution {
-  /// TS: O(N)
-  /// SC: O(N)
-  ////! Important to understand: https://www.youtube.com/watch?v=HZ5YTanv5QE
-  List<List<int>> levelOrder(TreeNode? root) {
+  List<List<int>> zigzagLevelOrder(TreeNode? root) {
     final List<List<int>> result = [];
     if (root == null) return result;
 
-    List<TreeNode> queue = [];
+    final List<TreeNode> queue = [];
+
     queue.add(root);
+    bool isRTL = true;
+
     while (queue.isNotEmpty) {
       int size = queue.length;
       final List<int> newLevel = [];
       while (size > 0) {
-        final node = queue.removeAt(0);
-        newLevel.add(node.val);
-        if (node.left != null) queue.add(node.left!);
-        if (node.right != null) queue.add(node.right!);
+        final visitedNode = queue.removeAt(0);
+        isRTL
+            ? newLevel.add(visitedNode.val)
+            : newLevel.insert(0, visitedNode.val);
+        if (visitedNode.left != null) queue.add(visitedNode.left!);
+        if (visitedNode.right != null) queue.add(visitedNode.right!);
         size--;
       }
       result.add(newLevel);
+      isRTL = !isRTL;
     }
 
     return result;
   }
+
+  /// Another Solution
+  // List<List<int>> zigzagLevelOrder(TreeNode? root) {
+  //   final List<List<int>> result = [];
+  //   if (root == null) return result;
+
+  //   /// The queue will include all the visited node
+  //   final List<TreeNode> queue = [];
+
+  //   queue.add(root);
+  //   bool isRTL = true;
+
+  //   while (queue.isNotEmpty) {
+  //     int size = queue.length;
+  //     final List<int> newLevel = [];
+  //     while (size > 0) {
+  //       final visitedNode = queue.removeAt(0);
+  //       newLevel.add(visitedNode.val);
+  //       if (visitedNode.left != null) queue.add(visitedNode.left!);
+  //       if (visitedNode.right != null) queue.add(visitedNode.right!);
+  //       size--;
+  //     }
+  //     result.add(isRTL ? newLevel : newLevel.reversed.toList());
+  //     isRTL = !isRTL;
+  //   }
+
+  //   return result;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
@@ -76,16 +108,16 @@ TreeNode? buildTree(List<int?> values) {
 void runTests() {
   final Solution s = Solution();
 
-  group('Binary Tree Level Order Traversal', () {
+  group('Binary Tree Zigzag Level Order Traversal', () {
     // ===== Examples =====
-    test('Example 1: [3,9,20,null,null,15,7] -> [[3],[9,20],[15,7]]', () {
+    test('Example 1: [3,9,20,null,null,15,7] -> [[3],[20,9],[15,7]]', () {
       final root = buildTree([3, 9, 20, null, null, 15, 7]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [3],
-          [9, 20],
-          [15, 7]
+          [20, 9],
+          [15, 7],
         ]),
       );
     });
@@ -93,7 +125,7 @@ void runTests() {
     test('Example 2: [1] -> [[1]]', () {
       final root = buildTree([1]);
       expect(
-          s.levelOrder(root),
+          s.zigzagLevelOrder(root),
           equals([
             [1]
           ]));
@@ -101,41 +133,31 @@ void runTests() {
 
     test('Example 3: [] -> []', () {
       final root = buildTree([]);
-      expect(s.levelOrder(root), equals([]));
+      expect(s.zigzagLevelOrder(root), equals([]));
     });
 
     // ===== Edge Cases =====
     test('Null root using [null] -> []', () {
       final root = buildTree([null]);
-      expect(s.levelOrder(root), equals([]));
+      expect(s.zigzagLevelOrder(root), equals([]));
     });
 
-    test('Single node with zero', () {
+    test('Single node zero', () {
       final root = buildTree([0]);
       expect(
-          s.levelOrder(root),
+          s.zigzagLevelOrder(root),
           equals([
             [0]
           ]));
     });
 
-    test('Single node with negative value', () {
-      final root = buildTree([-5]);
-      expect(
-          s.levelOrder(root),
-          equals([
-            [-5]
-          ]));
-    });
-
-    // ===== Two / Three Nodes =====
     test('Root with only left child', () {
       final root = buildTree([1, 2]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2]
+          [2],
         ]),
       );
     });
@@ -143,10 +165,10 @@ void runTests() {
     test('Root with only right child', () {
       final root = buildTree([1, null, 3]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [3]
+          [3],
         ]),
       );
     });
@@ -154,10 +176,10 @@ void runTests() {
     test('Root with two children', () {
       final root = buildTree([1, 2, 3]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3]
+          [3, 2],
         ]),
       );
     });
@@ -166,11 +188,11 @@ void runTests() {
     test('Perfect binary tree height 3', () {
       final root = buildTree([1, 2, 3, 4, 5, 6, 7]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3],
-          [4, 5, 6, 7]
+          [3, 2],
+          [4, 5, 6, 7],
         ]),
       );
     });
@@ -179,27 +201,27 @@ void runTests() {
       final root =
           buildTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3],
+          [3, 2],
           [4, 5, 6, 7],
-          [8, 9, 10, 11, 12, 13, 14, 15]
+          [15, 14, 13, 12, 11, 10, 9, 8],
         ]),
       );
     });
 
-    // ===== Unbalanced Trees =====
+    // ===== Unbalanced / Sparse Trees =====
     test('Left-skewed tree', () {
       final root = buildTree([1, 2, null, 3, null, 4, null, 5]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
           [2],
           [3],
           [4],
-          [5]
+          [5],
         ]),
       );
     });
@@ -207,13 +229,13 @@ void runTests() {
     test('Right-skewed tree', () {
       final root = buildTree([1, null, 2, null, 3, null, 4, null, 5]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
           [2],
           [3],
           [4],
-          [5]
+          [5],
         ]),
       );
     });
@@ -221,37 +243,37 @@ void runTests() {
     test('Sparse tree with gaps', () {
       final root = buildTree([1, 2, 3, null, 5, null, 7]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3],
-          [5, 7]
+          [3, 2],
+          [5, 7],
         ]),
       );
     });
 
-    test('Uneven tree mixed null positions', () {
+    test('Uneven sparse tree', () {
       final root = buildTree([10, 6, 15, 3, 8, null, 20, null, 4, 7, 9]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [10],
-          [6, 15],
+          [15, 6],
           [3, 8, 20],
-          [4, 7, 9]
+          [9, 7, 4],
         ]),
       );
     });
 
-    // ===== Negative and Boundary Values =====
+    // ===== Negative / Boundary Values =====
     test('All negative values', () {
       final root = buildTree([-1, -2, -3, -4, -5, -6, -7]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [-1],
-          [-2, -3],
-          [-4, -5, -6, -7]
+          [-3, -2],
+          [-4, -5, -6, -7],
         ]),
       );
     });
@@ -259,23 +281,23 @@ void runTests() {
     test('Mixed negative and positive values', () {
       final root = buildTree([0, -10, 10, -20, -5, 5, 20]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [0],
-          [-10, 10],
-          [-20, -5, 5, 20]
+          [10, -10],
+          [-20, -5, 5, 20],
         ]),
       );
     });
 
     test('Min and max constraint values', () {
-      final root = buildTree([0, -1000, 1000, -1000, null, null, 1000]);
+      final root = buildTree([0, -100, 100, -100, null, null, 100]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [0],
-          [-1000, 1000],
-          [-1000, 1000]
+          [100, -100],
+          [-100, 100],
         ]),
       );
     });
@@ -284,11 +306,11 @@ void runTests() {
     test('All duplicate values', () {
       final root = buildTree([5, 5, 5, 5, 5, 5, 5]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [5],
           [5, 5],
-          [5, 5, 5, 5]
+          [5, 5, 5, 5],
         ]),
       );
     });
@@ -296,11 +318,11 @@ void runTests() {
     test('Mixed duplicates', () {
       final root = buildTree([1, 2, 2, 3, 3, 3, 3]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
           [2, 2],
-          [3, 3, 3, 3]
+          [3, 3, 3, 3],
         ]),
       );
     });
@@ -309,24 +331,24 @@ void runTests() {
     test('Alternating values by level', () {
       final root = buildTree([1, 0, 0, 1, 1, 1, 1]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
           [0, 0],
-          [1, 1, 1, 1]
+          [1, 1, 1, 1],
         ]),
       );
     });
 
-    test('Zig-zag shaped sparse tree still level-order left to right', () {
+    test('Zig-zag shaped sparse tree still alternates by level', () {
       final root = buildTree([1, 2, 3, null, 4, 5, null, 6, null, null, 7]);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3],
+          [3, 2],
           [4, 5],
-          [6, 7]
+          [7, 6],
         ]),
       );
     });
@@ -336,13 +358,13 @@ void runTests() {
       final values = List<int?>.generate(31, (i) => i + 1);
       final root = buildTree(values);
       expect(
-        s.levelOrder(root),
+        s.zigzagLevelOrder(root),
         equals([
           [1],
-          [2, 3],
+          [3, 2],
           [4, 5, 6, 7],
-          [8, 9, 10, 11, 12, 13, 14, 15],
-          [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+          [15, 14, 13, 12, 11, 10, 9, 8],
+          [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
         ]),
       );
     });
@@ -354,7 +376,7 @@ void runTests() {
         values.add(i);
       }
       final root = buildTree(values);
-      final result = s.levelOrder(root);
+      final result = s.zigzagLevelOrder(root);
 
       expect(result.length, equals(100));
       expect(result.first, equals([1]));
@@ -362,12 +384,12 @@ void runTests() {
     });
 
     test('Constraint-style tree with 2000 nodes', () {
-      final values = List<int?>.generate(2000, (i) => i - 1000);
+      final values = List<int?>.generate(2000, (i) => (i % 201) - 100);
       final root = buildTree(values);
-      final result = s.levelOrder(root);
+      final result = s.zigzagLevelOrder(root);
 
-      expect(result.first, equals([-1000]));
-      expect(result.length, greaterThan(0));
+      expect(result.isNotEmpty, isTrue);
+      expect(result.first.length, equals(1));
       expect(result.expand((level) => level).length, equals(2000));
     });
 
@@ -375,21 +397,21 @@ void runTests() {
     test('All values should still exist in traversal', () {
       final values = [7, 3, 9, 1, 5, 8, 10];
       final root = buildTree(values);
-      final result = s.levelOrder(root).expand((level) => level).toList()
+      final result = s.zigzagLevelOrder(root).expand((level) => level).toList()
         ..sort();
       expect(result, equals([...values]..sort()));
     });
 
-    test('Each level should preserve left-to-right order', () {
-      final root = buildTree([1, 2, 3, 4, null, 5, 6]);
-      expect(
-        s.levelOrder(root),
-        equals([
-          [1],
-          [2, 3],
-          [4, 5, 6]
-        ]),
-      );
+    test('Second level must be reversed', () {
+      final root = buildTree([1, 2, 3, 4, 5, 6, 7]);
+      final result = s.zigzagLevelOrder(root);
+      expect(result[1], equals([3, 2]));
+    });
+
+    test('Third level must return to left-to-right', () {
+      final root = buildTree([1, 2, 3, 4, 5, 6, 7]);
+      final result = s.zigzagLevelOrder(root);
+      expect(result[2], equals([4, 5, 6, 7]));
     });
   });
 }
