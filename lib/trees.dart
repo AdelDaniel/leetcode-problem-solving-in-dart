@@ -79,4 +79,26 @@ class Trees {
 
     return result;
   }
+
+  List<int> inorderTraversal(TreeNode? root) {
+    final List<int> result = [];
+    if (root == null) return result;
+
+    final List<TreeNode> stack = [];
+
+    TreeNode? node = root;
+
+    while (stack.isNotEmpty || node != null) {
+      while (node != null) {
+        stack.add(node);
+        node = node.left;
+      }
+
+      node = stack.removeLast();
+      result.add(node.val);
+      node = node.right;
+    }
+
+    return result;
+  }
 }

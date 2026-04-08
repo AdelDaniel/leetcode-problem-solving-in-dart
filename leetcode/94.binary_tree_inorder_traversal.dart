@@ -5,11 +5,11 @@ import 'package:test/test.dart';
 
 void main() {
   final stopwatch = Stopwatch()..start();
-  runTests();
 
   final Solution s = Solution();
   s.inorderTraversal(buildTree([1, null, 2, 3]));
 
+  runTests();
   stopwatch.stop();
   print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro sec');
 }
@@ -27,29 +27,52 @@ class Solution {
     if (root == null) return result;
 
     final List<TreeNode> stack = [];
-    stack.add(root);
 
-    TreeNode? node;
-    while (stack.isNotEmpty) {
-      node = stack.last;
-      while (node?.left != null && stack.isNotEmpty) {
-        stack.add(node!.left!);
+    TreeNode? node = root;
+
+    while (stack.isNotEmpty || node != null) {
+      while (node != null) {
+        stack.add(node);
         node = node.left;
       }
 
       node = stack.removeLast();
       result.add(node.val);
-
-      while (node?.right == null && stack.isNotEmpty) {
-        node = stack.removeLast();
-        result.add(node.val);
-      }
-
-      if (node?.right != null) stack.add(node!.right!);
+      node = node.right;
     }
 
     return result;
   }
+
+  /// First solution
+  // List<int> inorderTraversal(TreeNode? root) {
+  //   final List<int> result = [];
+  //   if (root == null) return result;
+
+  //   final List<TreeNode> stack = [];
+  //   stack.add(root);
+
+  //   TreeNode? node;
+  //   while (stack.isNotEmpty) {
+  //     node = stack.last;
+  //     while (node?.left != null && stack.isNotEmpty) {
+  //       stack.add(node!.left!);
+  //       node = node.left;
+  //     }
+
+  //     node = stack.removeLast();
+  //     result.add(node.val);
+
+  //     while (node?.right == null && stack.isNotEmpty) {
+  //       node = stack.removeLast();
+  //       result.add(node.val);
+  //     }
+
+  //     if (node?.right != null) stack.add(node!.right!);
+  //   }
+
+  //   return result;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
