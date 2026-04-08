@@ -21,41 +21,61 @@ class TreeNode {
 }
 
 class Solution {
-  /// Solved the issue without recursion
+  /// Solved the issue without recursion Easier Solution
+  ////! Understand it: https://www.youtube.com/watch?v=1WxLM2hwL-U
   List<int> preorderTraversal(TreeNode? root) {
     final List<int> result = [];
     if (root == null) return result;
 
-    TreeNode? node = root;
-
     final List<TreeNode> stack = [];
-    stack.add(node);
-    result.add(node.val);
+    stack.add(root);
 
+    TreeNode? visitedNode;
     while (stack.isNotEmpty) {
-      /// Check all the left sides first.
-      while (node?.left != null) {
-        node = node?.left;
-        result.add(node!.val);
-        stack.add(node);
-      }
-      node = stack.removeLast();
-
-      /// Search for the all rights
-      while (node?.right == null && stack.isNotEmpty) {
-        node = stack.removeLast();
-      }
-      node = node?.right;
-
-      /// if there is right add it to the stack and search for its left again
-      if (node != null) {
-        result.add(node.val);
-        stack.add(node);
-      }
+      visitedNode = stack.removeLast();
+      result.add(visitedNode.val);
+      if (visitedNode.right != null) stack.add(visitedNode.right!);
+      if (visitedNode.left != null) stack.add(visitedNode.left!);
     }
 
     return result;
   }
+
+  // /// Solved the Problem without recursion
+  // List<int> preorderTraversal(TreeNode? root) {
+  //   final List<int> result = [];
+  //   if (root == null) return result;
+
+  //   TreeNode? node = root;
+
+  //   final List<TreeNode> stack = [];
+  //   stack.add(node);
+  //   result.add(node.val);
+
+  //   while (stack.isNotEmpty) {
+  //     /// Check all the left sides first.
+  //     while (node?.left != null) {
+  //       node = node?.left;
+  //       result.add(node!.val);
+  //       stack.add(node);
+  //     }
+  //     node = stack.removeLast();
+
+  //     /// Search for the all rights
+  //     while (node?.right == null && stack.isNotEmpty) {
+  //       node = stack.removeLast();
+  //     }
+  //     node = node?.right;
+
+  //     /// if there is right add it to the stack and search for its left again
+  //     if (node != null) {
+  //       result.add(node.val);
+  //       stack.add(node);
+  //     }
+  //   }
+
+  //   return result;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
