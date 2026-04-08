@@ -89,16 +89,63 @@ class Trees {
     TreeNode? node = root;
 
     while (stack.isNotEmpty || node != null) {
+      // Reach the leftmost node of the current node
       while (node != null) {
         stack.add(node);
         node = node.left;
       }
 
+      // Current must be null at this point
       node = stack.removeLast();
       result.add(node.val);
+
+      // Now visit the right subtree
       node = node.right;
     }
 
     return result;
+  }
+
+  /// Performs a Post-order traversal (Left -> Right -> Root)
+  /// using an iterative approach with a stack.
+  List<int> postorderTraversal(TreeNode? root) {
+    // 1. Handle empty tree case
+    if (root == null) return [];
+
+    // This list will store nodes in 'Reverse Post-order' (Root -> Right -> Left)
+    List<int> traversalOrder = [];
+
+    // The stack helps us keep track of nodes to visit next
+    List<TreeNode> stack = [root];
+
+    while (stack.isNotEmpty) {
+      // 2. Pop the last node added to the stack
+      TreeNode current = stack.removeLast();
+
+      // 3. Process the current node (Add to our temporary list)
+      traversalOrder.add(current.val);
+
+      /* 
+     * STRATEGY: To get Left -> Right -> Root, we first build 
+     * the sequence: Root -> Right -> Left.
+     * 
+     * To ensure 'Right' is processed before 'Left', 
+     * we push 'Left' into the stack first, then 'Right'.
+     */
+
+      // Push Left child first (will be at the bottom of the stack)
+      if (current.left != null) stack.add(current.left!);
+
+      // Push Right child second (will be popped and processed first)
+      if (current.right != null) stack.add(current.right!);
+    }
+
+    /* 
+   * 4. FINAL STEP:
+   * Our 'traversalOrder' is currently: [Root, Right, Left]
+   * By reversing it, we get: [Left, Right, Root]
+   * This is exactly what Post-order requires.
+   */
+    return traversalOrder.reversed.toList();
   }
 }
