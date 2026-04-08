@@ -8,8 +8,7 @@ class TreeNode {
 }
 
 class Trees {
-  /// TS: O(N)
-  /// SC: O(N)
+  /// TS: O(N) SC: O(N)
   ////! Important to understand: https://www.youtube.com/watch?v=HZ5YTanv5QE
   List<List<int>> levelOrder(TreeNode? root) {
     final List<List<int>> result = [];
@@ -61,6 +60,7 @@ class Trees {
     return result;
   }
 
+  /// TS: O(N) SC: O(N)
   ////! Understand it: https://www.youtube.com/watch?v=1WxLM2hwL-U
   List<int> preorderTraversal(TreeNode? root) {
     final List<int> result = [];
