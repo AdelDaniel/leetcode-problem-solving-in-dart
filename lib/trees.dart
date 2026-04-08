@@ -106,6 +106,7 @@ class Trees {
     return result;
   }
 
+  /// TS: O(N) SC: O(N)
   /// Performs a Post-order traversal (Left -> Right -> Root)
   /// using an iterative approach with a stack.
   List<int> postorderTraversal(TreeNode? root) {

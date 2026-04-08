@@ -94,6 +94,13 @@
   - Rotate Matrix
 - Greedy Algorithm
 - Binary Tree (DS)
+  - (DFT) (Depth First Traversal)
+    - Pre Order Traversal (Root - Left - Right)
+    - In Order Traversal (Left - Root - Right)
+    - Post Order Traversal (Left - Right - Root) From (Root - Right - Left) Reversed
+  - Breadth First Traversal
+    - Standard Level Order Traversal
+    - Zigzag Level Order Traversal
 
 ### Notes:
 
