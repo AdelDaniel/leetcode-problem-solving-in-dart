@@ -21,7 +21,41 @@ class TreeNode {
 }
 
 class Solution {
-  /// Solved the issue without recursion Easier Solution
+  ////! Morris Traversal (Pre Order Traversal)
+  /// TS: O(N) && SC: O(1)
+  /// The node we visit at the end should its right point again to the most first node of the tree or subtree
+  // List<int> preorderTraversal(TreeNode? root) {
+  //   final List<int> result = [];
+  //   if (root == null) return result;
+
+  //   TreeNode? currentNode = root;
+  //   while (currentNode != null) {
+  //     if (currentNode.left == null) {
+  //       result.add(currentNode.val);
+  //       currentNode = currentNode.right;
+  //     } else {
+  //       TreeNode? mostRightNode = currentNode.left;
+  //       while (mostRightNode?.right != null &&
+  //           mostRightNode?.right != currentNode) {
+  //         mostRightNode = mostRightNode?.right;
+  //       }
+
+  //       if (mostRightNode?.right == null) {
+  //         result.add(currentNode.val);
+  //         mostRightNode?.right = currentNode;
+  //         currentNode = currentNode.left;
+  //       } else {
+  //         mostRightNode?.right = null;
+  //         currentNode = currentNode.right;
+  //       }
+  //     }
+  //   }
+
+  //   return result;
+  // }
+
+  ////! Popular Solution
+  ////! Solved the issue without recursion Easier Solution
   ////! Understand it: https://www.youtube.com/watch?v=1WxLM2hwL-U
   List<int> preorderTraversal(TreeNode? root) {
     final List<int> result = [];
@@ -41,6 +75,7 @@ class Solution {
     return result;
   }
 
+  ////! First solution not efficient
   // /// Solved the Problem without recursion
   // List<int> preorderTraversal(TreeNode? root) {
   //   final List<int> result = [];
