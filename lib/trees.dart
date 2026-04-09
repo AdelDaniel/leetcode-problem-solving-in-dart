@@ -149,4 +149,44 @@ class Trees {
    */
     return traversalOrder.reversed.toList();
   }
+
+  /// Morris Traversal (Pre Order Traversal)
+  /// TS: O(N) && SC: O(1)
+  /// The node we visit at the end should its right point again to the most first node of the tree or subtree
+  List<int> morrisPreorderTraversal(TreeNode? root) {
+    final List<int> result = [];
+    if (root == null) return result;
+
+    TreeNode? currentNode = root;
+    while (currentNode != null) {
+      if (currentNode.left == null) {
+        result.add(currentNode.val);
+        currentNode = currentNode.right;
+      } else {
+        TreeNode? mostRightNode = currentNode.left;
+        while (mostRightNode?.right != null &&
+            mostRightNode?.right != currentNode) {
+          mostRightNode = mostRightNode?.right;
+        }
+
+        /// in the case of the (mostRightNode?.right != null) == false
+        /// We don't have a thread so create one.
+        if (mostRightNode?.right == null) {
+          result.add(currentNode.val);
+          mostRightNode?.right = currentNode;
+          currentNode = currentNode.left;
+
+          /// in the case of the (mostRightNode?.right != currentNode) == false
+          /// mostRightNode?.right == currentNode
+          /// We already have a thread and the right points to the current.
+          /// And means we back again to the same node 
+        } else {
+          mostRightNode?.right = null;
+          currentNode = currentNode.right;
+        }
+      }
+    }
+
+    return result;
+  }
 }
