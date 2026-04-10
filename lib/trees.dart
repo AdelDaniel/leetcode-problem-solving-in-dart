@@ -163,6 +163,8 @@ class Trees {
         result.add(currentNode.val);
         currentNode = currentNode.right;
       } else {
+        /// Find the most right node
+        /// The last node will be printed in this subtree
         TreeNode? mostRightNode = currentNode.left;
         while (mostRightNode?.right != null &&
             mostRightNode?.right != currentNode) {
@@ -179,10 +181,43 @@ class Trees {
           /// in the case of the (mostRightNode?.right != currentNode) == false
           /// mostRightNode?.right == currentNode
           /// We already have a thread and the right points to the current.
-          /// And means we back again to the same node 
+          /// And means we back again to the same node
         } else {
           mostRightNode?.right = null;
           currentNode = currentNode.right;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  ////! Morris In Order Traversal
+  ////! TC: O(N) SC: O(1)
+  ////! Check the above function of the morrisPreorderTraversal
+  List<int> morrisInorderTraversal(TreeNode? root) {
+    final List<int> result = [];
+    if (root == null) return result;
+
+    TreeNode? currentNode = root;
+    TreeNode? mostRightNode = root.left;
+    while (currentNode != null) {
+      if (currentNode.left == null) {
+        result.add(currentNode.val);
+        currentNode = currentNode.right;
+      } else {
+        mostRightNode = currentNode.left;
+        while (mostRightNode?.right != null &&
+            mostRightNode?.right != currentNode) {
+          mostRightNode = mostRightNode?.right;
+        }
+        if (mostRightNode?.right == null) {
+          mostRightNode?.right = currentNode;
+          currentNode = currentNode.left;
+        } else {
+          result.add(currentNode.val);
+          currentNode = currentNode.right;
+          mostRightNode?.right = null;
         }
       }
     }

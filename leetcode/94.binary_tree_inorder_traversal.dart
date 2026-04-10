@@ -22,27 +22,59 @@ class TreeNode {
 }
 
 class Solution {
+  ////! Morris In Order Traversal
   List<int> inorderTraversal(TreeNode? root) {
     final List<int> result = [];
     if (root == null) return result;
 
-    final List<TreeNode> stack = [];
-
-    TreeNode? node = root;
-
-    while (stack.isNotEmpty || node != null) {
-      while (node != null) {
-        stack.add(node);
-        node = node.left;
+    TreeNode? currentNode = root;
+    TreeNode? mostRightNode = root.left;
+    while (currentNode != null) {
+      if (currentNode.left == null) {
+        result.add(currentNode.val);
+        currentNode = currentNode.right;
+      } else {
+        mostRightNode = currentNode.left;
+        while (mostRightNode?.right != null &&
+            mostRightNode?.right != currentNode) {
+          mostRightNode = mostRightNode?.right;
+        }
+        if (mostRightNode?.right == null) {
+          mostRightNode?.right = currentNode;
+          currentNode = currentNode.left;
+        } else {
+          result.add(currentNode.val);
+          currentNode = currentNode.right;
+          mostRightNode?.right = null;
+        }
       }
-
-      node = stack.removeLast();
-      result.add(node.val);
-      node = node.right;
     }
 
     return result;
   }
+
+  ////! Popular Solution and the most Used
+  // List<int> inorderTraversal(TreeNode? root) {
+  //   final List<int> result = [];
+  //   if (root == null) return result;
+
+  //   final List<TreeNode> stack = [];
+
+  //   TreeNode? node = root;
+
+  //   while (stack.isNotEmpty || node != null) {
+  //     while (node != null) {
+  //       stack.add(node);
+  //       node = node.left;
+  //     }
+
+  //     node = stack.removeLast();
+  //     result.add(node.val);
+  //     node = node.right;
+  //   }
+
+  //   return result;
+  // }
 
   /// First solution
   // List<int> inorderTraversal(TreeNode? root) {
