@@ -1,5 +1,7 @@
 // leetcode/111.minimum_depth_of_binary_tree.dart
 // https://leetcode.com/problems/minimum-depth-of-binary-tree/
+import 'dart:math';
+
 import 'package:test/test.dart';
 
 void main() {
@@ -21,28 +23,54 @@ class TreeNode {
 }
 
 class Solution {
+  /// Recursion Solution
+  /// Harder than the previous one
   int minDepth(TreeNode? root) {
     if (root == null) return 0;
-
-    List<TreeNode> queue = [root];
-    TreeNode? currentNode;
-    int levelCounter = 1;
-
-    while (queue.isNotEmpty) {
-      final size = queue.length;
-      for (var i = 0; i < size; i++) {
-        currentNode = queue.removeAt(0);
-        if (currentNode.left == null && currentNode.right == null) {
-          return levelCounter;
-        } else {
-          if (currentNode.left != null) queue.add(currentNode.left!);
-          if (currentNode.right != null) queue.add(currentNode.right!);
-        }
-      }
-      levelCounter++;
-    }
-    return levelCounter;
+    return minLevel(root)!;
   }
+
+  int? minLevel(TreeNode? root) {
+    TreeNode? currentNode = root;
+    if (currentNode == null) {
+      /// infinity == Don't calculate
+      return null;
+    } else if (currentNode.left == null && currentNode.right == null) {
+      return 1;
+    } else {
+      final left = minLevel(currentNode.left);
+      final right = minLevel(currentNode.right);
+      if (left != null && right != null) return 1 + min(left, right);
+      if (left == null && right != null) return 1 + right;
+      if (right == null && left != null) return 1 + left;
+      return null;
+    }
+  }
+
+  ////! I think that is a better solution
+  /// Solved without recursion
+  // int minDepth(TreeNode? root) {
+  //   if (root == null) return 0;
+
+  //   List<TreeNode> queue = [root];
+  //   TreeNode? currentNode;
+  //   int levelCounter = 1;
+
+  //   while (queue.isNotEmpty) {
+  //     final size = queue.length;
+  //     for (var i = 0; i < size; i++) {
+  //       currentNode = queue.removeAt(0);
+  //       if (currentNode.left == null && currentNode.right == null) {
+  //         return levelCounter;
+  //       } else {
+  //         if (currentNode.left != null) queue.add(currentNode.left!);
+  //         if (currentNode.right != null) queue.add(currentNode.right!);
+  //       }
+  //     }
+  //     levelCounter++;
+  //   }
+  //   return levelCounter;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
