@@ -1,5 +1,7 @@
 // leetcode/104.maximum_depth_of_binary_tree.dart
 // https://leetcode.com/problems/maximum-depth-of-binary-tree/
+import 'dart:math';
+
 import 'package:test/test.dart';
 
 void main() {
@@ -21,25 +23,47 @@ class TreeNode {
 }
 
 class Solution {
-  /// Accepted But too slow
+  /// Recursion Solution
   int maxDepth(TreeNode? root) {
     if (root == null) return 0;
-
-    List<TreeNode> queue = [root];
-    TreeNode? currentNode;
-    int levelCounter = 0;
-
-    while (queue.isNotEmpty) {
-      final size = queue.length;
-      for (var i = 0; i < size; i++) {
-        currentNode = queue.removeAt(0);
-        if (currentNode.left != null) queue.add(currentNode.left!);
-        if (currentNode.right != null) queue.add(currentNode.right!);
-      }
-      levelCounter++;
-    }
-    return levelCounter;
+    return findMax(root)!;
   }
+
+  int? findMax(TreeNode? node) {
+    if (node == null) {
+      return null;
+    } else if (node.left == null && node.right == null) {
+      return 1;
+    } else {
+      final right = findMax(node.right);
+      final left = findMax(node.left);
+
+      if (left != null && right != null) return 1 + max(left, right);
+      if (left == null && right != null) return 1 + right;
+      if (right == null && left != null) return 1 + left;
+      return null;
+    }
+  }
+
+  /// Accepted But too slow
+  // int maxDepth(TreeNode? root) {
+  //   if (root == null) return 0;
+
+  //   List<TreeNode> queue = [root];
+  //   TreeNode? currentNode;
+  //   int levelCounter = 0;
+
+  //   while (queue.isNotEmpty) {
+  //     final size = queue.length;
+  //     for (var i = 0; i < size; i++) {
+  //       currentNode = queue.removeAt(0);
+  //       if (currentNode.left != null) queue.add(currentNode.left!);
+  //       if (currentNode.right != null) queue.add(currentNode.right!);
+  //     }
+  //     levelCounter++;
+  //   }
+  //   return levelCounter;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
