@@ -1,5 +1,7 @@
 // trees.dart
 
+import 'dart:math';
+
 class TreeNode {
   int val;
   TreeNode? left;
@@ -223,5 +225,32 @@ class Trees {
     }
 
     return result;
+  }
+
+  /// Depth First Search (Left+Right=Number of Edges)
+  int diameter = 0;
+  int dfsNumOfEdges(TreeNode? node) {
+    if (node == null) return 0;
+    final right = dfsNumOfEdges(node.right);
+    final left = dfsNumOfEdges(node.left);
+    diameter = max(left + right, diameter);
+    return 1 + max(left, right);
+  }
+
+  /// Depth First Search (1+Left+Right = Number of Nodes)
+  int? dfsNumOfNodes(TreeNode? node) {
+    if (node == null) {
+      /// infinity == Don't calculate
+      return null;
+    } else if (node.left == null && node.right == null) {
+      return 1;
+    } else {
+      final left = dfsNumOfNodes(node.left);
+      final right = dfsNumOfNodes(node.right);
+      if (left != null && right != null) return 1 + min(left, right);
+      if (left == null && right != null) return 1 + right;
+      if (right == null && left != null) return 1 + left;
+      return null;
+    }
   }
 }

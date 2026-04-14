@@ -1,5 +1,6 @@
 // leetcode/543.diameter_of_binary_tree.dart
 // https://leetcode.com/problems/diameter-of-binary-tree/
+
 import 'dart:math';
 
 import 'package:test/test.dart';
@@ -23,50 +24,72 @@ class TreeNode {
 }
 
 class Solution {
+  int diameter = 0;
+
   /// Not the best solution
   int diameterOfBinaryTree(TreeNode? root) {
-    if (root == null) return 0;
+    if (root == null) return diameter;
     dfs(root);
-
-    final List<TreeNode> stack = [root];
-    int max = root.val;
-    TreeNode? current;
-    while (stack.isNotEmpty) {
-      current = stack.removeLast();
-      if (current.val > max) max = current.val;
-      if (current.val == 0) continue;
-      if (current.right != null) stack.add(current.right!);
-      if (current.left != null) stack.add(current.left!);
-    }
-
-    return max;
+    final res = diameter;
+    diameter = 0;
+    return res;
   }
 
   /// Depth First Search
-  int? dfs(TreeNode? node) {
-    if (node == null) {
-      return null;
-    } else if (node.right == null && node.left == null) {
-      node.val = 0;
-      return 1;
-    } else {
-      final right = dfs(node.right);
-      final left = dfs(node.left);
-
-      if (left != null && right != null) {
-        node.val = left + right;
-        return 1 + max(left, right);
-      } else if (left != null && right == null) {
-        node.val = left;
-        return 1 + left;
-      } else if (left == null && right != null) {
-        node.val = right;
-        return 1 + right;
-      }
-
-      return null;
-    }
+  int dfs(TreeNode? node) {
+    int result = 0;
+    if (node == null) return result;
+    final right = dfs(node.right);
+    final left = dfs(node.left);
+    result = left + right;
+    diameter = max(result, diameter);
+    return 1 + max(left, right);
   }
+
+  // /// Not the best solution
+  // int diameterOfBinaryTree(TreeNode? root) {
+  //   if (root == null) return 0;
+  //   dfs(root);
+
+  //   final List<TreeNode> stack = [root];
+  //   int max = root.val;
+  //   TreeNode? current;
+  //   while (stack.isNotEmpty) {
+  //     current = stack.removeLast();
+  //     if (current.val > max) max = current.val;
+  //     if (current.val == 0) continue;
+  //     if (current.right != null) stack.add(current.right!);
+  //     if (current.left != null) stack.add(current.left!);
+  //   }
+
+  //   return max;
+  // }
+
+  // /// Depth First Search
+  // int? dfs(TreeNode? node) {
+  //   if (node == null) {
+  //     return null;
+  //   } else if (node.right == null && node.left == null) {
+  //     node.val = 0;
+  //     return 1;
+  //   } else {
+  //     final right = dfs(node.right);
+  //     final left = dfs(node.left);
+
+  //     if (left != null && right != null) {
+  //       node.val = left + right;
+  //       return 1 + max(left, right);
+  //     } else if (left != null && right == null) {
+  //       node.val = left;
+  //       return 1 + left;
+  //     } else if (left == null && right != null) {
+  //       node.val = right;
+  //       return 1 + right;
+  //     }
+
+  //     return null;
+  //   }
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
