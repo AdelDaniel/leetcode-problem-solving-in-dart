@@ -24,23 +24,50 @@ class TreeNode {
 class Solution {
   /// Solved
   /// TC: O(N)
-  /// SC: O(N)
+  /// SC: O(1) Morris
   void flatten(TreeNode? root) {
     if (root == null) return;
-    final stack = [root];
-    TreeNode? currentNode;
+    TreeNode? currentNode = root;
 
-    while (stack.isNotEmpty) {
-      currentNode = stack.removeLast();
-      if (currentNode.right != null) stack.add(currentNode.right!);
-      if (currentNode.left != null) stack.add(currentNode.left!);
+    while (currentNode != null) {
+      if (currentNode.left == null) {
+        currentNode = currentNode.right;
+      } else {
+        /// Find the most right
+        TreeNode? mostRight = currentNode.left;
+        while (mostRight?.right != null) {
+          mostRight = mostRight?.right;
+        }
 
-      currentNode.left = null;
-      if (stack.isNotEmpty) {
-        currentNode.right = stack.last;
+        /// Then assign it to the current Node
+        mostRight?.right ??= currentNode.right;
+        TreeNode? leftNode = currentNode.left;
+        currentNode.right = leftNode;
+        currentNode.left = null;
+        currentNode = leftNode;
       }
     }
   }
+
+  /// Solved
+  /// TC: O(N)
+  /// SC: O(N)
+  // void flatten(TreeNode? root) {
+  //   if (root == null) return;
+  //   final stack = [root];
+  //   TreeNode? currentNode;
+
+  //   while (stack.isNotEmpty) {
+  //     currentNode = stack.removeLast();
+  //     if (currentNode.right != null) stack.add(currentNode.right!);
+  //     if (currentNode.left != null) stack.add(currentNode.left!);
+
+  //     currentNode.left = null;
+  //     if (stack.isNotEmpty) {
+  //       currentNode.right = stack.last;
+  //     }
+  //   }
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
