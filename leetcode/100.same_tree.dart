@@ -21,32 +21,44 @@ class TreeNode {
 }
 
 class Solution {
+  /// Nice Try with recursion
   bool isSameTree(TreeNode? p, TreeNode? q) {
     if (p == null && q == null) return true;
     if (p == null && q != null) return false;
     if (p != null && q == null) return false;
 
-    final List<TreeNode> pStack = [p!];
-    final List<TreeNode> qStack = [q!];
-
-    while (pStack.isNotEmpty && qStack.isNotEmpty) {
-      TreeNode currentP = pStack.removeLast();
-      TreeNode currentQ = qStack.removeLast();
-
-      if (currentP.val != currentQ.val) return false;
-      if (currentP.left != null && currentQ.left == null) return false;
-      if (currentP.left == null && currentQ.left != null) return false;
-      if (currentP.right != null && currentQ.right == null) return false;
-      if (currentP.right == null && currentQ.right != null) return false;
-
-      if (currentP.left != null) pStack.add(currentP.left!);
-      if (currentP.right != null) pStack.add(currentP.right!);
-      if (currentQ.left != null) qStack.add(currentQ.left!);
-      if (currentQ.right != null) qStack.add(currentQ.right!);
-    }
-    if (pStack.isEmpty && qStack.isEmpty) return true;
-    return false;
+    return p!.val == q!.val &&
+        isSameTree(p.right, q.right) &&
+        isSameTree(p.left, q.left);
   }
+
+  /// Solved
+  // bool isSameTree(TreeNode? p, TreeNode? q) {
+  //   if (p == null && q == null) return true;
+  //   if (p == null && q != null) return false;
+  //   if (p != null && q == null) return false;
+
+  //   final List<TreeNode> pStack = [p!];
+  //   final List<TreeNode> qStack = [q!];
+
+  //   while (pStack.isNotEmpty && qStack.isNotEmpty) {
+  //     TreeNode currentP = pStack.removeLast();
+  //     TreeNode currentQ = qStack.removeLast();
+
+  //     if (currentP.val != currentQ.val) return false;
+  //     if (currentP.left != null && currentQ.left == null) return false;
+  //     if (currentP.left == null && currentQ.left != null) return false;
+  //     if (currentP.right != null && currentQ.right == null) return false;
+  //     if (currentP.right == null && currentQ.right != null) return false;
+
+  //     if (currentP.left != null) pStack.add(currentP.left!);
+  //     if (currentP.right != null) pStack.add(currentP.right!);
+  //     if (currentQ.left != null) qStack.add(currentQ.left!);
+  //     if (currentQ.right != null) qStack.add(currentQ.right!);
+  //   }
+  //   if (pStack.isEmpty && qStack.isEmpty) return true;
+  //   return false;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
