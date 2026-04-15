@@ -21,20 +21,38 @@ class TreeNode {
 }
 
 class Solution {
+  ////! Iterative Solution
   TreeNode? invertTree(TreeNode? root) {
-    return dfs(root);
-  }
-
-  TreeNode? dfs(TreeNode? root) {
-    if (root == null) return null;
-    dfs(root.right);
-    dfs(root.left);
-    final temp = root.right;
-    root.right = root.left;
-    root.left = temp;
-
+    if (root == null || (root.left == null && root.right == null)) return root;
+    final List<TreeNode> stack = [];
+    stack.add(root);
+    TreeNode? visitedNode;
+    while (stack.isNotEmpty) {
+      visitedNode = stack.removeLast();
+      if (visitedNode.right != null) stack.add(visitedNode.right!);
+      if (visitedNode.left != null) stack.add(visitedNode.left!);
+      final temp = visitedNode.right;
+      visitedNode.right = visitedNode.left;
+      visitedNode.left = temp;
+    }
     return root;
   }
+
+  ////! Recursion Solution
+  // TreeNode? invertTree(TreeNode? root) {
+  //   return dfs(root);
+  // }
+
+  // TreeNode? dfs(TreeNode? root) {
+  //   if (root == null) return null;
+  //   dfs(root.right);
+  //   dfs(root.left);
+  //   final temp = root.right;
+  //   root.right = root.left;
+  //   root.left = temp;
+
+  //   return root;
+  // }
 }
 
 TreeNode? buildTree(List<int?> values) {
