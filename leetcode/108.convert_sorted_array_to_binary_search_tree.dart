@@ -27,15 +27,32 @@ class TreeNode {
 class Solution {
   /// TC: O(N) SC:(N)
   TreeNode? sortedArrayToBST(List<int> nums) {
-    if (nums.isEmpty) return null;
-
-    final int centerIndex = nums.length ~/ 2;
-    final root = TreeNode(nums[centerIndex]);
-    root.left = sortedArrayToBST(nums.sublist(0, centerIndex));
-    root.right = sortedArrayToBST(nums.sublist(centerIndex + 1));
-
-    return root;
+    return bs(nums, 0, nums.length - 1);
   }
+
+  /// better solution without generating sub-lists
+  TreeNode? bs(List<int> nums, int low, int high) {
+    if (low > high) return null;
+
+    final int mid = low + (high - low) ~/ 2;
+    final node = TreeNode(nums[mid]);
+    node.left = bs(nums, low, mid - 1);
+    node.right = bs(nums, mid + 1, high);
+
+    return node;
+  }
+
+  /// TC: O(N) SC:(N)
+  // TreeNode? sortedArrayToBST(List<int> nums) {
+  //   if (nums.isEmpty) return null;
+
+  //   final int centerIndex = nums.length ~/ 2;
+  //   final root = TreeNode(nums[centerIndex]);
+  //   root.left = sortedArrayToBST(nums.sublist(0, centerIndex));
+  //   root.right = sortedArrayToBST(nums.sublist(centerIndex + 1));
+
+  //   return root;
+  // }
 }
 
 List<int?> treeToList(TreeNode? root) {
