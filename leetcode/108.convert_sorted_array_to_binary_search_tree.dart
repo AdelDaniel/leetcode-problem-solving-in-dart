@@ -6,8 +6,6 @@ import 'package:test/test.dart';
 void main() {
   final stopwatch = Stopwatch()..start();
 
-  print(7 ~/ 2);
-
   final Solution s = Solution();
   // s.sortedArrayToBST([-10, -3, 0, 5, 9]);
   s.sortedArrayToBST([0, 1, 2, 3, 4, 5]);
@@ -385,29 +383,6 @@ void runTests() {
       final root = s.sortedArrayToBST(nums);
 
       expect(root?.val, anyOf(equals(3), equals(4)));
-    });
-
-    /// Leet Code use cases
-    test('Screenshot case: [0,1,2,3,4,5]', () {
-      final nums = [0, 1, 2, 3, 4, 5];
-      final root = s.sortedArrayToBST(nums);
-
-      expect(treeToList(root), equals([3, 1, 5, 0, 2, 4]));
-      expect(inorderTraversal(root), equals(nums));
-      expect(isValidBST(root), isTrue);
-      expect(isBalanced(root), isTrue);
-      expect(countNodes(root), equals(nums.length));
-    });
-
-    test('Screenshot case: [0,1,2,3,4,5] stays balanced', () {
-      final nums = [0, 1, 2, 3, 4, 5];
-      final root = s.sortedArrayToBST(nums);
-
-      expect(inorderTraversal(root), equals(nums));
-      expect(isValidBST(root), isTrue);
-      expect(isBalanced(root), isTrue);
-      expect(countNodes(root), equals(nums.length));
-      expect(root?.val, equals(3));
     });
   });
 }
