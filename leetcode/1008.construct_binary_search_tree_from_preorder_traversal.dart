@@ -51,6 +51,32 @@ class Solution {
 
     return root;
   }
+
+  ////! Another Solution
+  // int nodeIndex = 0;
+
+  // TreeNode? bstFromPreorder(List<int> preorder) {
+  //   if (preorder.isEmpty) return null;
+  //   return helper(preorder, null, null);
+  // }
+
+  // TreeNode? helper(List<int> preorder, int? min, int? max) {
+  //   if (nodeIndex == preorder.length) return null;
+
+  //   int current = preorder[nodeIndex];
+
+  //   if ((min != null && current <= min) || (max != null && current >= max)) {
+  //     return null;
+  //   }
+
+  //   nodeIndex++;
+  //   TreeNode node = TreeNode(current);
+
+  //   node.left = helper(preorder, min, current);
+  //   node.right = helper(preorder, current, max);
+
+  //   return node;
+  // }
 }
 
 List<int?> treeToList(TreeNode? root) {
