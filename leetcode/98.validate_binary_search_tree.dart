@@ -105,6 +105,7 @@ class Solution {
     return dfs(root, null, null);
   }
 
+  /// SC and TC are: O(N)
   bool dfs(TreeNode? root, int? low, int? high) {
     if (root == null) return true;
     final currentValue = root.val;
