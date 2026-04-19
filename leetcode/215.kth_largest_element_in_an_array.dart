@@ -1,5 +1,6 @@
 // leetcode/215.kth_largest_element_in_an_array.dart
 // https://leetcode.com/problems/kth-largest-element-in-an-array/
+
 import 'package:test/test.dart';
 
 void main() {
@@ -13,57 +14,142 @@ void main() {
   print('Function Execution Time : ${stopwatch.elapsedMicroseconds} micro sec');
 }
 
+class MinHeap {
+  final List<int> _heap = [];
+
+  // Helper to get parent and child indices
+  int _parent(int i) => (i - 1) ~/ 2;
+  int _left(int i) => 2 * i + 1;
+  int _right(int i) => 2 * i + 2;
+
+  // Adds an element and restores the heap property (bubble up)
+  void insert(int value) {
+    _heap.add(value);
+    _bubbleUp(_heap.length - 1);
+  }
+
+  void _bubbleUp(int index) {
+    while (index > 0 && _heap[index] < _heap[_parent(index)]) {
+      _swap(index, _parent(index));
+      index = _parent(index);
+    }
+  }
+
+  void _swap(int i, int j) {
+    int temp = _heap[i];
+    _heap[i] = _heap[j];
+    _heap[j] = temp;
+  }
+
+  int get peek {
+    if (_heap.isEmpty) {
+      throw StateError('Heap is empty');
+    }
+    return _heap[0];
+  }
+
+  // Removes and returns the smallest element
+  int? pop() {
+    if (_heap.isEmpty) return null;
+    if (_heap.length == 1) return _heap.removeLast();
+
+    final min = _heap[0];
+    _heap[0] = _heap.removeLast(); // Move last element to root
+    _bubbleDown(0);
+    return min;
+  }
+
+  void _bubbleDown(int index) {
+    int smallest = index;
+    int left = _left(index);
+    int right = _right(index);
+
+    // Change: Find the SMALLEST among parent and children
+    if (left < _heap.length && _heap[left] < _heap[smallest]) smallest = left;
+    if (right < _heap.length && _heap[right] < _heap[smallest]) {
+      smallest = right;
+    }
+
+    if (smallest != index) {
+      _swap(index, smallest);
+      _bubbleDown(smallest);
+    }
+  }
+}
+
 class Solution {
-  /// Solved with Merge Sort
-  /// Divide and conquer
+  /// Heap Solution
+  /// TC: O(k + (n-k)*log(k))
+  /// SC: O(k) Heap
   int findKthLargest(List<int> nums, int k) {
-    mergeSort(nums, 0, nums.length - 1);
-    return nums[nums.length - k];
-  }
+    final heap = MinHeap();
 
-  void mergeSort(List<int> nums, int left, int right) {
-    if (left < right) {
-      final mid = left + (right - left) ~/ 2;
-      mergeSort(nums, left, mid);
-      mergeSort(nums, mid + 1, right);
-      sortList(nums, left, mid, right);
-    }
-  }
-
-  void sortList(List<int> nums, int left, int mid, int right) {
-    final leftList = [];
-    final rightList = [];
-
-    for (var i = left; i <= mid; i++) {
-      leftList.add(nums[i]);
+    /// add only the k values TC: O(k)
+    for (var i = 0; i < k; i++) {
+      heap.insert(nums[i]);
     }
 
-    for (var i = mid + 1; i <= right; i++) {
-      rightList.add(nums[i]);
-    }
-
-    int i = 0;
-    int j = 0;
-    int k = left;
-
-    while (i < leftList.length && j < rightList.length) {
-      if (leftList[i] < rightList[j]) {
-        nums[k++] = leftList[i++];
-      } else {
-        nums[k++] = rightList[j++];
+    /// TC: O((n-k)* Log(k))
+    for (var i = k; i < nums.length; i++) {
+      if (heap.peek < nums[i]) {
+        heap.pop();
+        heap.insert(nums[i]);
       }
     }
-
-    while (i < leftList.length) {
-      nums[k++] = leftList[i++];
-    }
-
-    while (j < rightList.length) {
-      nums[k++] = rightList[j++];
-    }
+    return heap.peek;
   }
 
-  /// ! Dangerous --> Stack over flow
+  ////! Solved with Merge Sort
+  ////! Divide and conquer
+  ////! TC: O(NLogN) SC: O(N)
+  // int findKthLargest(List<int> nums, int k) {
+  //   mergeSort(nums, 0, nums.length - 1);
+  //   return nums[nums.length - k];
+  // }
+
+  // void mergeSort(List<int> nums, int left, int right) {
+  //   if (left < right) {
+  //     final mid = left + (right - left) ~/ 2;
+  //     mergeSort(nums, left, mid);
+  //     mergeSort(nums, mid + 1, right);
+  //     sortList(nums, left, mid, right);
+  //   }
+  // }
+
+  // void sortList(List<int> nums, int left, int mid, int right) {
+  //   final leftList = [];
+  //   final rightList = [];
+
+  //   for (var i = left; i <= mid; i++) {
+  //     leftList.add(nums[i]);
+  //   }
+
+  //   for (var i = mid + 1; i <= right; i++) {
+  //     rightList.add(nums[i]);
+  //   }
+
+  //   int i = 0;
+  //   int j = 0;
+  //   int k = left;
+
+  //   while (i < leftList.length && j < rightList.length) {
+  //     if (leftList[i] < rightList[j]) {
+  //       nums[k++] = leftList[i++];
+  //     } else {
+  //       nums[k++] = rightList[j++];
+  //     }
+  //   }
+
+  //   while (i < leftList.length) {
+  //     nums[k++] = leftList[i++];
+  //   }
+
+  //   while (j < rightList.length) {
+  //     nums[k++] = rightList[j++];
+  //   }
+  // }
+
+  //// ! Dangerous --> Stack over flow
   /// Solved with Quick Sort
   /// Divide and conquer
   /// TC: O(n)
